@@ -1,8 +1,8 @@
 syntax = "proto2";
 
-package example.name_generator.v1;
+package example.name_generator.proto.v1;
 
-import "example/name_generator/v1/name_generator.proto";
+import "example/name_generator/proto/v1/name_generator.proto";
 
 service NameGeneratorService {
   rpc GetRandomName(GetRandomNameRequest) returns (GetRandomNameResponse);

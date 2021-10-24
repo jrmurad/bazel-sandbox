@@ -10,7 +10,7 @@ ts_project(
     declaration = True,
     tsconfig = "//:tsconfig.json",
     deps = [
-        "//example/name_generator/v1:js_lib",
+        "//example/name_generator/proto/v1:js_lib",
         "@npm//@grpc/grpc-js",
         "@npm//@types/google-protobuf",
         "@npm//google-protobuf",

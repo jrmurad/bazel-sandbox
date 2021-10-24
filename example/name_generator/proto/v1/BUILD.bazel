@@ -7,7 +7,7 @@ proto_library(
     name = "v1",
     srcs = glob(["*.proto"]),
     visibility = ["//example:__subpackages__"],
-    deps = ["//example/common/naming/v1"],
+    deps = ["//example/common/naming/proto/v1"],
 )
 
 js_grpc_node_library(
@@ -16,7 +16,7 @@ js_grpc_node_library(
         "//js:grpc_node_ts_plugin": ["mode=grpc-js"],
     },
     protos = [
-        "//example/common/naming/v1", # JRM: shouldn't have to specify this?
+        "//example/common/naming/proto/v1", # JRM: shouldn't have to specify this?
         ":v1",
     ],
 )
@@ -24,7 +24,7 @@ js_grpc_node_library(
 js_grpc_web_library(
     name = "web_lib",
     protos = [
-        "//example/common/naming/v1", # JRM: shouldn't have to specify this?
+        "//example/common/naming/proto/v1", # JRM: shouldn't have to specify this?
         ":v1",
     ],
 )

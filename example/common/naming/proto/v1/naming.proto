@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package example.common.naming.v1;
+package example.common.naming.proto.v1;
 
 enum Title {
   TITLE_MR = 1;
