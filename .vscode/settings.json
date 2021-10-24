@@ -1,0 +1,9 @@
+{
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "search.exclude": {
+    "bazel-*/**": true,
+    "yarn.lock": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+}
