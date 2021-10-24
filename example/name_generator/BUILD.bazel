@@ -10,18 +10,19 @@ js_grpc_node_library(
         "//js:grpc_node_ts_plugin": ["mode=grpc-js"],
     },
     protos = [
-        "//example/common/naming/v1", # JRM: shouldn't have to specify this?
-        "//example/services/name_generator/v1",
+        "//example/common/naming/v1",  # JRM: shouldn't have to specify this?
+        "//example/name_generator/v1",
     ],
 )
 
 ts_project(
-    name = "main_ts",
-    tsconfig = "//:tsconfig.json",
+    name = "index_ts",
+    srcs = glob(
+        ["src/**/*.ts"],
+        exclude = ["src/**/*.test.ts"],
+    ),
     declaration = True,
-    srcs = [
-        "main.ts"
-    ],
+    tsconfig = "//:tsconfig.json",
     deps = [
         ":js_lib",
         "@npm//@grpc/grpc-js",
@@ -32,6 +33,6 @@ ts_project(
 
 nodejs_binary(
     name = "name_generator",
-    data = [ ":main_ts" ],
-    entry_point = ":main.ts",
+    data = [":index_ts"],
+    entry_point = "src/index.ts",
 )

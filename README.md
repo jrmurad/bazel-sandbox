@@ -2,8 +2,8 @@
 
 ## Usage
 
-`bazel run //example/services/name_generator`
-`grpcurl -plaintext -proto ./example/services/name_generator/v1/name_generator_service.proto localhost:50051 example.services.name_generator.v1.NameGeneratorService/GetRandomName`
+`bazel run //example/name_generator`
+`grpcurl -plaintext -proto ./example/name_generator/v1/name_generator_service.proto localhost:50051 example.name_generator.v1.NameGeneratorService/GetRandomName`
 
 ## TODO
 

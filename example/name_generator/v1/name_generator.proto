@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package example.services.name_generator.v1;
+package example.name_generator.v1;
 
 import "example/common/naming/v1/naming.proto";
 
