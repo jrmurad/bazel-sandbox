@@ -1,0 +1,16 @@
+{
+  "name": "unity",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@bazel/typescript": "^3.8.0",
+    "@grpc/grpc-js": "1.4.1",
+    "google-protobuf": "^3.19.0",
+    "grpc-tools": "1.11.2",
+    "ts-protoc-gen": "0.15.0",
+    "typescript": "^4.4.4"
+  },
+  "devDependencies": {
+    "@types/google-protobuf": "^3.15.5"
+  }
+}

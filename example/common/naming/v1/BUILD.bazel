@@ -1,0 +1,8 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+package(default_visibility = ["//example:__subpackages__"])
+
+proto_library(
+    name = "v1",
+    srcs = glob(["*.proto"]),
+)

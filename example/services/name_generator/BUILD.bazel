@@ -1,0 +1,37 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
+load("@npm//@bazel/typescript:index.bzl", "ts_project")
+load("@rules_proto_grpc//js:defs.bzl", "js_grpc_node_library")
+
+package(default_visibility = ["//visibility:private"])
+
+js_grpc_node_library(
+    name = "js_lib",
+    options = {
+        "//js:grpc_node_ts_plugin": ["mode=grpc-js"],
+    },
+    protos = [
+        "//example/common/naming/v1", # JRM: shouldn't have to specify this?
+        "//example/services/name_generator/v1",
+    ],
+)
+
+ts_project(
+    name = "main_ts",
+    tsconfig = "//:tsconfig.json",
+    declaration = True,
+    srcs = [
+        "main.ts"
+    ],
+    deps = [
+        ":js_lib",
+        "@npm//@grpc/grpc-js",
+        "@npm//@types/google-protobuf",
+        "@npm//google-protobuf",
+    ],
+)
+
+nodejs_binary(
+    name = "name_generator",
+    data = [ ":main_ts" ],
+    entry_point = ":main.ts",
+)

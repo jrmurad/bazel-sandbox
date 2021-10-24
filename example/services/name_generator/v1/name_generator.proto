@@ -1,0 +1,11 @@
+syntax = "proto2";
+
+package example.services.name_generator.v1;
+
+import "example/common/naming/v1/naming.proto";
+
+message GetRandomNameRequest {}
+
+message GetRandomNameResponse {
+  required example.common.naming.v1.Name name = 1;
+}
