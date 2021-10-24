@@ -27,7 +27,7 @@ server.addService(NameGeneratorServiceService, {
 } as INameGeneratorServiceServer);
 
 server.bindAsync(
-  "0.0.0.0:50051",
+  "127.0.0.1:50051",
   grpc.ServerCredentials.createInsecure(),
   () => {
     server.start();

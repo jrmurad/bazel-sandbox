@@ -1,0 +1,6 @@
+package(default_visibility = ["//visibility:public"])
+
+filegroup(
+    name = "example_com_tls",
+    srcs = glob(["example-com.*"]),
+)

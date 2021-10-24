@@ -3,7 +3,7 @@ import { GetRandomNameRequest } from "unity/example/name_generator/proto/v1/web_
 import { NameGeneratorServiceClient } from "unity/example/name_generator/proto/v1/web_lib_pb/example/name_generator/proto/v1/name_generator_service_grpc_web_pb";
 
 const nameGeneratorService = new NameGeneratorServiceClient(
-  "http://localhost:50051"
+  "https://127.0.0.1:8443"
 );
 
 const request = new GetRandomNameRequest();
@@ -13,5 +13,5 @@ nameGeneratorService.getRandomName(request, {}, (err, response) => {
     return;
   }
 
-  console.log(response);
+  console.log(response.toObject());
 });

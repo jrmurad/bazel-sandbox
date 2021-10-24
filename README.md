@@ -2,8 +2,16 @@
 
 ## Usage
 
+### Service
+
 `bazel run //example/name_generator`
 `grpcurl -plaintext -proto ./example/name_generator/proto/v1/name_generator_service.proto localhost:50051 example.name_generator.proto.v1.NameGeneratorService/GetRandomName`
+
+### Web
+
+Chrome: `#allow-insecure-localhost`
+`bazel run //:grpcwebproxy`
+`bazel run //example/name_generator/ui:devserver`
 
 ## TODO
 
