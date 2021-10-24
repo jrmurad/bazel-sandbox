@@ -23,10 +23,8 @@ js_grpc_node_library(
 
 js_grpc_web_library(
     name = "web_lib",
-    # options = {
-    #     "//js:grpc_node_ts_plugin": ["mode=grpc-js"],
-    # },
     protos = [
+        "//example/common/naming/v1", # JRM: shouldn't have to specify this?
         ":v1",
     ],
 )

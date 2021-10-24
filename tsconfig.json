@@ -2,6 +2,7 @@
     "compilerOptions": {
       "baseUrl": ".",
       "declaration": true,
+      "lib": ["DOM", "ES2015"],
       "paths": {
         "unity/*": [
           "*",

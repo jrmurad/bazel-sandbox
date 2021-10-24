@@ -11,14 +11,21 @@ ts_project(
     declaration = True,
     tsconfig = "//:tsconfig.json",
     deps = [
+        "//example/name_generator/v1:web_lib",
+        "@npm//@types/google-protobuf",
+        "@npm//google-protobuf",
+        "@npm//grpc-web",
     ],
 )
 
 rollup_bundle(
     name = "bundle",
+    config_file = "//:rollup.config.js",
     entry_point = "index.js",
+    format = "iife",
     deps = [
         ":index_ts",
+        "@npm//@rollup/plugin-commonjs",
     ],
 )
 
