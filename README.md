@@ -5,12 +5,13 @@
 ### Service
 
 `bazel run //example/name_generator`
-`grpcurl -plaintext -proto ./example/name_generator/proto/v1/name_generator_service.proto localhost:50051 example.name_generator.proto.v1.NameGeneratorService/GetRandomName`
+`grpcurl -plaintext -proto ./example/name_generator/proto/v1/name_generator_service.proto 127.0.0.1:50051 example.name_generator.proto.v1.NameGeneratorService/GetRandomName`
 
 ### Web
 
 Chrome: `#allow-insecure-localhost`
 `bazel run //:grpcwebproxy`
+`grpcurl -insecure -proto ./example/name_generator/proto/v1/name_generator_service.proto 127.0.0.1:8443 example.name_generator.proto.v1.NameGeneratorService/GetRandomName`
 `bazel run //example/name_generator/ui:devserver`
 
 ## TODO

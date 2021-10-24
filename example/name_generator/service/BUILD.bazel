@@ -1,6 +1,8 @@
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
 load("@npm//@bazel/typescript:index.bzl", "ts_project")
 
+PORT = 50051
+
 ts_project(
     name = "index_ts",
     srcs = glob(
@@ -13,7 +15,9 @@ ts_project(
         "//example/name_generator/proto/v1:js_lib",
         "@npm//@grpc/grpc-js",
         "@npm//@types/google-protobuf",
+        "@npm//@types/yargs",
         "@npm//google-protobuf",
+        "@npm//yargs",
     ],
 )
 
@@ -22,4 +26,23 @@ nodejs_binary(
     data = [":index_ts"],
     entry_point = ":index.ts",
     args = ["--bazel_patch_module_resolver"],
+    templated_args = ["--port={}".format(PORT)],
+)
+
+sh_binary(
+    name = "grpcwebproxy",
+    srcs = ["@grpcwebproxy//:dist/grpcwebproxy-v0.14.1-linux-x86_64"],
+    args = [
+        "--allow_all_origins",
+        "--backend_addr=127.0.0.1:{}".format(PORT),
+        "--backend_tls_noverify",
+        "--run_http_server=false",
+        "--server_http_max_write_timeout=24h",
+        "--server_tls_cert_file=./certs/example-com.crt",
+        "--server_tls_key_file=./certs/example-com.key",
+    ],
+    data = [
+        "//certs:example_com_tls",
+        "@grpcwebproxy//:dist/grpcwebproxy-v0.14.1-linux-x86_64",
+    ],
 )
