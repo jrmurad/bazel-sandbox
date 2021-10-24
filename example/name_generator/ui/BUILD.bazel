@@ -39,8 +39,8 @@ live_server(
     ],
     templated_args = [
         "./example/name_generator/ui",
-        "--no-browser",
         "--entry-file=index.html",
         "--mount=/bundle.js:example/name_generator/ui/bundle/bundle.js",
+        "--no-browser",
     ],
 )
