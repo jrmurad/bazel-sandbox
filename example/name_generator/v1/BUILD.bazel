@@ -1,8 +1,32 @@
 load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_proto_grpc//js:defs.bzl", "js_grpc_node_library", "js_grpc_web_library")
+
+package(default_visibility = ["//example:__subpackages__"])
 
 proto_library(
     name = "v1",
     srcs = glob(["*.proto"]),
     visibility = ["//example:__subpackages__"],
     deps = ["//example/common/naming/v1"],
+)
+
+js_grpc_node_library(
+    name = "js_lib",
+    options = {
+        "//js:grpc_node_ts_plugin": ["mode=grpc-js"],
+    },
+    protos = [
+        "//example/common/naming/v1", # JRM: shouldn't have to specify this?
+        ":v1",
+    ],
+)
+
+js_grpc_web_library(
+    name = "web_lib",
+    # options = {
+    #     "//js:grpc_node_ts_plugin": ["mode=grpc-js"],
+    # },
+    protos = [
+        ":v1",
+    ],
 )

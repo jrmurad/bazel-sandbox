@@ -1,0 +1,25 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
+load("@npm//@bazel/typescript:index.bzl", "ts_project")
+
+ts_project(
+    name = "index_ts",
+    srcs = glob(
+        ["**/*.ts"],
+        exclude = ["**/*.test.ts"],
+    ),
+    declaration = True,
+    tsconfig = "//:tsconfig.json",
+    deps = [
+        "//example/name_generator/v1:js_lib",
+        "@npm//@grpc/grpc-js",
+        "@npm//@types/google-protobuf",
+        "@npm//google-protobuf",
+    ],
+)
+
+nodejs_binary(
+    name = "service",
+    data = [":index_ts"],
+    entry_point = ":index.ts",
+    args = ["--bazel_patch_module_resolver"],
+)

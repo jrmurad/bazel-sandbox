@@ -2,12 +2,12 @@ import * as grpc from "@grpc/grpc-js";
 import {
   Name,
   Title
-} from "unity/example/name_generator/js_lib_pb/example/common/naming/v1/naming_pb";
-import { GetRandomNameResponse } from "unity/example/name_generator/js_lib_pb/example/name_generator/v1/name_generator_pb";
+} from "unity/example/name_generator/v1/js_lib_pb/example/common/naming/v1/naming_pb";
+import { GetRandomNameResponse } from "unity/example/name_generator/v1/js_lib_pb/example/name_generator/v1/name_generator_pb";
 import {
   INameGeneratorServiceServer,
   NameGeneratorServiceService
-} from "unity/example/name_generator/js_lib_pb/example/name_generator/v1/name_generator_service_grpc_pb";
+} from "unity/example/name_generator/v1/js_lib_pb/example/name_generator/v1/name_generator_service_grpc_pb";
 
 const server = new grpc.Server();
 

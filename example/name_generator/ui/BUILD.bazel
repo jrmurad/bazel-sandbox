@@ -1,0 +1,37 @@
+load("@npm//@bazel/rollup:index.bzl", "rollup_bundle")
+load("@npm//@bazel/typescript:index.bzl", "ts_project")
+load("@npm//live-server:index.bzl", "live_server")
+
+ts_project(
+    name = "index_ts",
+    srcs = glob(
+        ["**/*.ts"],
+        exclude = ["**/*.story.tsx"],
+    ),
+    declaration = True,
+    tsconfig = "//:tsconfig.json",
+    deps = [
+    ],
+)
+
+rollup_bundle(
+    name = "bundle",
+    entry_point = "index.js",
+    deps = [
+        ":index_ts",
+    ],
+)
+
+live_server(
+    name = "devserver",
+    data = [
+        "index.html",
+        ":bundle",
+    ],
+    templated_args = [
+        "./example/name_generator/ui",
+        "--no-browser",
+        "--entry-file=index.html",
+        "--mount=/bundle.js:example/name_generator/ui/bundle/bundle.js",
+    ],
+)
