@@ -3,6 +3,7 @@
       "baseUrl": ".",
       "declaration": true,
       "esModuleInterop": true,
+      "jsx": "react",
       "lib": ["DOM", "ES2015"],
       "paths": {
         "unity/*": [

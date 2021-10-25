@@ -1,11 +1,11 @@
-load("@npm//@bazel/rollup:index.bzl", "rollup_bundle")
 load("@npm//@bazel/typescript:index.bzl", "ts_project")
-load("@npm//live-server:index.bzl", "live_server")
+
+package(default_visibility = ["//example:__subpackages__"])
 
 ts_project(
-    name = "index_ts",
+    name = "ui",
     srcs = glob(
-        ["**/*.ts"],
+        ["**/*.tsx"],
         exclude = ["**/*.story.tsx"],
     ),
     declaration = True,
@@ -13,34 +13,11 @@ ts_project(
     deps = [
         "//example/name_generator/proto/v1:web_lib",
         "@npm//@types/google-protobuf",
+        "@npm//@types/react",
+        "@npm//@types/react-dom",
         "@npm//google-protobuf",
         "@npm//grpc-web",
-    ],
-)
-
-rollup_bundle(
-    name = "bundle",
-    config_file = "//:rollup.config.js",
-    entry_point = "index.js",
-    format = "iife",
-    deps = [
-        ":index_ts",
-        "@npm//@rollup/plugin-alias",
-        "@npm//@rollup/plugin-commonjs",
-        "@npm//@rollup/plugin-node-resolve",
-    ],
-)
-
-live_server(
-    name = "devserver",
-    data = [
-        "index.html",
-        ":bundle",
-    ],
-    templated_args = [
-        "./example/name_generator/ui",
-        "--entry-file=index.html",
-        "--mount=/bundle.js:example/name_generator/ui/bundle/bundle.js",
-        "--no-browser",
+        "@npm//react",
+        "@npm//react-dom",
     ],
 )

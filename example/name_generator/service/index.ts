@@ -1,8 +1,6 @@
 import * as grpc from "@grpc/grpc-js";
-import {
-  Name,
-  Title,
-} from "unity/example/name_generator/proto/v1/js_lib_pb/example/common/naming/proto/v1/naming_pb";
+import faker from "faker";
+import { Name } from "unity/example/name_generator/proto/v1/js_lib_pb/example/common/naming/proto/v1/naming_pb";
 import { GetRandomNameResponse } from "unity/example/name_generator/proto/v1/js_lib_pb/example/name_generator/proto/v1/name_generator_pb";
 import {
   INameGeneratorServiceServer,
@@ -23,9 +21,8 @@ server.addService(NameGeneratorServiceService, {
     const response = new GetRandomNameResponse();
 
     const name = new Name();
-    name.setFirstName("First");
-    name.setLastName("Last");
-    name.setTitle(Title.TITLE_MR);
+    name.setFirstName(faker.name.firstName());
+    name.setLastName(faker.name.lastName());
 
     response.setName(name);
 

@@ -13,9 +13,11 @@ ts_project(
     tsconfig = "//:tsconfig.json",
     deps = [
         "//example/name_generator/proto/v1:js_lib",
+        "@npm//@types/faker",
         "@npm//@grpc/grpc-js",
         "@npm//@types/google-protobuf",
         "@npm//@types/yargs",
+        "@npm//faker",
         "@npm//google-protobuf",
         "@npm//yargs",
     ],

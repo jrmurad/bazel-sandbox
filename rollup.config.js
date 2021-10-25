@@ -1,6 +1,7 @@
 import alias from "@rollup/plugin-alias";
 import commonjs from "@rollup/plugin-commonjs";
-import resolve from '@rollup/plugin-node-resolve';
+import replace from "@rollup/plugin-replace";
+import resolve from "@rollup/plugin-node-resolve";
 import path from "path";
 
 const projectRoot = path
@@ -9,10 +10,16 @@ const projectRoot = path
 
 export default {
   plugins: [
-    commonjs(),
     alias({
       entries: [{ find: /^unity\/(.+)$/, replacement: `${projectRoot}/$1` }],
     }),
+
+    commonjs(),
+
+    replace({
+      "process.env.NODE_ENV": '"development"',
+    }),
+
     resolve(),
   ],
 };
