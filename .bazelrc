@@ -1,0 +1,5 @@
+# Cache action outputs on disk so they persist across output_base and bazel shutdown (eg. changing branches)
+build --disk_cache=.bazel-cache/disk
+
+# Bazel picks up host-OS-specific config lines from bazelrc files
+build --enable_platform_specific_config
