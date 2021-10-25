@@ -4,6 +4,7 @@
   },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
   "search.exclude": {
     "bazel-*/**": true,
     "yarn.lock": true
