@@ -6,7 +6,7 @@ ts_project(
     name = "index_ts",
     srcs = glob(
         ["**/*.tsx"],
-        exclude = ["**/*.story.tsx"],
+        exclude = ["**/*.stories.tsx"],
     ),
     declaration = True,
     tsconfig = "//:tsconfig.json",

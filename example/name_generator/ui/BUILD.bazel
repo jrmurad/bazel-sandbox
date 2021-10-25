@@ -6,10 +6,11 @@ ts_project(
     name = "ui",
     srcs = glob(
         ["**/*.tsx"],
-        exclude = ["**/*.story.tsx"],
+        exclude = ["**/*.stories.tsx"],
     ),
     declaration = True,
     tsconfig = "//:tsconfig.json",
+    visibility = ["//example:__subpackages__"],
     deps = [
         "//example/name_generator/proto/v1:web_lib",
         "@npm//@types/google-protobuf",

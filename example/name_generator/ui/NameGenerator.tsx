@@ -3,7 +3,7 @@ import { GetRandomNameRequest } from "unity/example/name_generator/proto/v1/web_
 import { NameGeneratorServiceClient } from "unity/example/name_generator/proto/v1/web_lib_pb/example/name_generator/proto/v1/name_generator_service_grpc_web_pb";
 
 export const NameGenerator: React.FC = () => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState<string | undefined>();
 
   const generateNewName = useCallback(() => {
     const nameGeneratorService = new NameGeneratorServiceClient(
@@ -11,13 +11,14 @@ export const NameGenerator: React.FC = () => {
     );
 
     const request = new GetRandomNameRequest();
+
     nameGeneratorService.getRandomName(request, {}, (err, response) => {
       if (err) {
         console.error(err);
         return;
       }
 
-      setName(response.getName().getFirstName() || "");
+      setName(response.getName().getFirstName());
     });
   }, []);
 

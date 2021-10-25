@@ -13,8 +13,8 @@ ts_project(
     tsconfig = "//:tsconfig.json",
     deps = [
         "//example/name_generator/proto/v1:js_lib",
-        "@npm//@types/faker",
         "@npm//@grpc/grpc-js",
+        "@npm//@types/faker",
         "@npm//@types/google-protobuf",
         "@npm//@types/yargs",
         "@npm//faker",
@@ -25,9 +25,9 @@ ts_project(
 
 nodejs_binary(
     name = "service",
+    args = ["--bazel_patch_module_resolver"],
     data = [":index_ts"],
     entry_point = ":index.ts",
-    args = ["--bazel_patch_module_resolver"],
     templated_args = ["--port={}".format(PORT)],
 )
 
