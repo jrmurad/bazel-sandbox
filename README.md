@@ -8,7 +8,7 @@ sandbox will attempt to minimize deviation from the norm.
 
 ### Service
 
-    bazel run //example/name_generator
+    bazel run //example/name_generator/service
 
     grpcurl -plaintext -proto ./example/name_generator/proto/v1/name_generator_service.proto 127.0.0.1:50051 example.name_generator.proto.v1.NameGeneratorService/GetRandomName`
 
@@ -16,7 +16,7 @@ sandbox will attempt to minimize deviation from the norm.
 
 enable Chrome flag: #allow-insecure-localhost
 
-    bazel run //:grpcwebproxy
+    bazel run //example/name_generator/service:grpcwebproxy
 
     grpcurl -insecure -proto ./example/name_generator/proto/v1/name_generator_service.proto 127.0.0.1:8443 example.name_generator.proto.v1.NameGeneratorService/GetRandomName
 
