@@ -17,7 +17,7 @@ export const NameGenerator: React.FC = () => {
         return;
       }
 
-      setName(response.toObject().name.firstName || "");
+      setName(response.getName().getFirstName() || "");
     });
   }, []);
 

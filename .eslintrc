@@ -1,0 +1,47 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "prettier/react"
+  ],
+  "globals": {
+    "fin": "readonly"
+  },
+  "overrides": [
+    {
+      "files": ["*.stories.tsx"],
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": "off"
+      }
+    }
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "jest",
+    "prettier",
+    "react-hooks",
+    "react",
+    "simple-import-sort",
+    "sort-destructure-keys",
+    "sort-keys-fix",
+    "typescript-sort-keys"
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    "react/jsx-sort-props": "error",
+    "simple-import-sort/exports": "error",
+    "simple-import-sort/imports": [
+      "error",
+      { "groups": [["^\\u0000", "^@?\\w", "^[^.]", "^\\."]] }
+    ],
+    "sort-destructure-keys/sort-destructure-keys": ["error", { "caseSensitive": false }],
+    "sort-keys-fix/sort-keys-fix": ["error", "asc", { "caseSensitive": false, "natural": true }],
+    "typescript-sort-keys/interface": "error",
+    "typescript-sort-keys/string-enum": "error"
+  }
+}
