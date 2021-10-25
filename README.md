@@ -1,5 +1,9 @@
 # Bazel Sandbox
 
+One year ago, I put together a sandbox which relied on a lot of patching. Now
+that it has become clear that standard practices have not changed, this new
+sandbox will attempt to minimize deviation from the norm.
+
 ## Usage
 
 ### Service
@@ -23,16 +27,22 @@ enable Chrome flag: #allow-insecure-localhost
 ### Must Have
 
 1. prove grpc-web works in production
-1. prove that a create-react-app project can use bazel-built npm package within monorepo
+1. prove that a create-react-app project can use bazel-built npm package within
+   monorepo
 1. jest
 1. storyshots (html and image)
 
+### Should Have
+
+1. upgrade to v4 of rules-proto-grpc (currently broken: [Issue
+   2910](https://github.com/bazelbuild/rules_nodejs/issues/2910))
+1. why is it necessary to be explicit with transitive dependency?
+1. is there a way around the awful import paths?
+1. JS objects rather than "builder" style (if we're going to use this, might as
+   well go to proto3? scala issues?)
+
 ### Nice to Have
 
-1. upgrade to v4 of rules-proto-grpc (currently broken: [Issue 2910](https://github.com/bazelbuild/rules_nodejs/issues/2910))
-1. why was it necessary to be explicit with transitive dependency?
-1. import paths are awful
-1. JS objects rather than "builder" style (if we're going to use this, might as well go to proto3? scala issues?)
 1. attempt to use ts-proto?
 1. attempt to use nestjs?
 1. possible to get grpc-web generated string enums?
