@@ -1,6 +1,5 @@
 load("@npm//@bazel/typescript:index.bzl", "ts_project")
-
-package(default_visibility = ["//example:__subpackages__"])
+load("//:tools/jest.bzl", "jest_test")
 
 ts_project(
     name = "ui",
@@ -21,4 +20,43 @@ ts_project(
         "@npm//react",
         "@npm//react-dom",
     ],
+)
+
+ts_project(
+    name = "stories",
+    srcs = glob([
+        "**/*.stories.tsx",
+    ]),
+    declaration = True,
+    tsconfig = "//:tsconfig.json",
+    deps = [
+        ":ui",
+        "@npm//@storybook/react",
+    ],
+)
+
+ts_project(
+    name = "tests",
+    srcs = glob([
+        "**/*.test.ts",
+    ]),
+    declaration = True,
+    tsconfig = "//:tsconfig.json",
+    deps = [
+        ":ui",
+        "@npm//@storybook/addon-storyshots",
+    ],
+)
+
+jest_test(
+    name = "storyshots",
+    srcs = [
+        ":tests",
+    ],
+    data = [
+        "//:.storybook",
+        ":stories",
+    ] + glob([
+        "**/__snapshots__/*.snap",
+    ]),
 )

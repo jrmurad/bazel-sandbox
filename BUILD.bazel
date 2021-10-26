@@ -1,6 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
 exports_files([
+    ".storybook",
+    "jest.config.js",
     "package.json",
     "rollup.config.js",
     "tsconfig.json",
