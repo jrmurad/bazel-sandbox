@@ -22,6 +22,12 @@ enable Chrome flag: #allow-insecure-localhost
 
     bazel run //example/ui
 
+### Storyshots
+
+    bazel test //example/name_generator/ui:storyshots
+
+    bazel run //example/name_generator/ui:storyshots.update
+
 ## TODO
 
 ### Must Have
