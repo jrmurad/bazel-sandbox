@@ -1,0 +1,6 @@
+build --disk_cache=.bazel-cache/disk
+common --repository_cache=.bazel-cache/repo
+
+test --test_output=errors
+
+try-import %workspace%/.bazelrc.user
