@@ -1,4 +1,4 @@
-load("@build_bazel_rules_nodejs//:index.bzl", "npm_package_bin")
+load("@build_bazel_rules_nodejs//:index.bzl", "copy_to_bin", "npm_package_bin")
 load("@npm//@bazel/typescript:index.bzl", "ts_project")
 load("//:tools/jest.bzl", "jest_test")
 
@@ -23,15 +23,24 @@ ts_project(
     ],
 )
 
+copy_to_bin(
+    name = "stories",
+    srcs = glob(["**/*.stories.tsx"]),
+)
+
 npm_package_bin(
     name = "storybook",
+    args = [
+        "--config-dir bazel-out/k8-fastbuild/bin/.storybook",
+        "--output-dir bazel-out/k8-fastbuild/bin/storybook-static",
+    ],
     data = [
+        ":stories",
         ":ui",
-        "//:.storybook",
-        "//:package.json",
+        "//:storybook_data_copy",
         "//:tsconfig.json",
         "@npm//tsconfig-paths-webpack-plugin",
-    ] + glob(["**/*.stories.tsx"]),
+    ],
     output_dir = True,
     tool = "@npm//@storybook/react/bin:build-storybook",
 )

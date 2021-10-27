@@ -1,4 +1,15 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "copy_to_bin")
+
 package(default_visibility = ["//visibility:public"])
+
+# these files are needed when npm_package_bin is used to build storybook
+copy_to_bin(
+    name = "storybook_data_copy",
+    srcs = [
+        ".storybook/main.ts",
+        "package.json",
+    ],
+)
 
 exports_files([
     ".storybook",
