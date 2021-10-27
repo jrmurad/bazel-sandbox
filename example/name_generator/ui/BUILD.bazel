@@ -33,5 +33,8 @@ jest_test(
         "@npm//@storybook/addon-storyshots",
         "@npm//@storybook/react",
         "@npm//tsconfig-paths-webpack-plugin",
-    ] + glob(["**/*.stories.tsx"]) + glob(["**/__snapshots__/*.snap"]),
+    ] + glob([
+        "**/*.stories.tsx",
+        "**/__snapshots__/*.snap",
+    ]),
 )
