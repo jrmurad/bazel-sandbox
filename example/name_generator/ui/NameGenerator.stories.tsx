@@ -1,7 +1,6 @@
 import React from "react";
+import { NameGenerator } from "./NameGenerator";
 
-const Component = () => <div>hi</div>;
+export default { component: NameGenerator, title: "Examples / NameGenerator" };
 
-export default { component: Component, title: "Examples / NameGenerator" };
-
-export const Basic = () => <Component />;
+export const Component = () => <NameGenerator />;

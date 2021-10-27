@@ -1,7 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Examples / NameGenerator Basic 1`] = `
-<div>
-  hi
-</div>
+exports[`Storyshots Examples / NameGenerator Component 1`] = `
+Array [
+  <button
+    onClick={[Function]}
+  >
+    Generate New Name
+  </button>,
+  <div />,
+]
 `;
