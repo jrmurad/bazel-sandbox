@@ -28,7 +28,7 @@ enable Chrome flag: #allow-insecure-localhost
 
     bazel run //example/name_generator/ui:storyshots.update
 
-## FIXME
+#### FIXME
 
 1. need to run outside of bazel to generate first snapshot (`yarn jest -u`)
 1. jest config different with and without bazel (tsconfig paths)
