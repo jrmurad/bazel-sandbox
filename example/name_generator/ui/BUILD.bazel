@@ -29,6 +29,7 @@ jest_test(
         ":ui",
         "//:.storybook",
         "//:babel.config.js",
+        "//:package.json",
         "@npm//@storybook/addon-storyshots",
         "@npm//@storybook/react",
         "@npm//tsconfig-paths-webpack-plugin",
