@@ -1,0 +1,6 @@
+package(default_visibility = ["//example:__subpackages__"])
+
+exports_files([
+    "storyshots.test.ts",
+    "storyshots.puppeteer.test.ts",
+])

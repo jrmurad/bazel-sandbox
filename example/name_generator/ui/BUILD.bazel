@@ -1,3 +1,4 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "npm_package_bin")
 load("@npm//@bazel/typescript:index.bzl", "ts_project")
 load("//:tools/jest.bzl", "jest_test")
 
@@ -22,19 +23,38 @@ ts_project(
     ],
 )
 
+npm_package_bin(
+    name = "storybook",
+    data = [
+        ":ui",
+        "//:.storybook",
+        "//:package.json",
+        "//:tsconfig.json",
+        "@npm//tsconfig-paths-webpack-plugin",
+    ] + glob(["**/*.stories.tsx"]),
+    output_dir = True,
+    tool = "@npm//@storybook/react/bin:build-storybook",
+)
+
 jest_test(
     name = "storyshots",
-    srcs = glob(["**/*.test.ts"]),
+    srcs = [
+        # "//example:storyshots.puppeteer.test.ts",
+        "//example:storyshots.test.ts",
+    ],
     data = [
+        # ":storybook",
         ":ui",
         "//:.storybook",
         "//:babel.config.js",
         "//:package.json",
         "@npm//@storybook/addon-storyshots",
+        "@npm//@storybook/addon-storyshots-puppeteer",
         "@npm//@storybook/react",
         "@npm//tsconfig-paths-webpack-plugin",
     ] + glob([
         "**/*.stories.tsx",
-        "**/__snapshots__/*.snap",
+        "**/__image_snapshots__/*.png",
+        "**/__snapshots__/*.storyshot",
     ]),
 )

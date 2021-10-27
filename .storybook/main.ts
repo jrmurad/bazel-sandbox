@@ -8,6 +8,8 @@ module.exports = {
       new TsconfigPathsPlugin({ extensions: [".js", ".jsx", ".ts", ".tsx"] }),
     ];
 
+    config.performance.hints = false;
+
     return config;
   },
 };

@@ -3,5 +3,7 @@ bazel-*
 
 node_modules
 
+storybook-static
+
 yarn-debug.log*
 yarn-error.log*
