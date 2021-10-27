@@ -2,6 +2,7 @@ package(default_visibility = ["//visibility:public"])
 
 exports_files([
     ".storybook",
+    "babel.config.js",
     "jest.config.js",
     "package.json",
     "rollup.config.js",

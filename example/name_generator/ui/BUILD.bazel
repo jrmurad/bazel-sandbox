@@ -22,34 +22,15 @@ ts_project(
     ],
 )
 
-ts_project(
-    name = "stories",
-    srcs = glob(["**/*.stories.tsx"]),
-    declaration = True,
-    tsconfig = "//:tsconfig.json",
-    deps = [
-        ":ui",
-        "@npm//@storybook/react",
-    ],
-)
-
-ts_project(
-    name = "tests",
-    srcs = glob(["**/*.test.ts"]),
-    declaration = True,
-    tsconfig = "//:tsconfig.json",
-    deps = [
-        ":ui",
-        "@npm//@storybook/addon-storyshots",
-    ],
-)
-
 jest_test(
     name = "storyshots",
-    srcs = [":tests"],
+    srcs = glob(["**/*.test.ts"]),
     data = [
+        ":ui",
         "//:.storybook",
+        "//:babel.config.js",
+        "@npm//@storybook/addon-storyshots",
+        "@npm//@storybook/react",
         "@npm//tsconfig-paths-webpack-plugin",
-        ":stories",
-    ] + glob(["**/__snapshots__/*.snap"]),
+    ] + glob(["**/*.stories.tsx"]) + glob(["**/__snapshots__/*.snap"]),
 )

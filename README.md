@@ -32,7 +32,6 @@ enable Chrome flag: #allow-insecure-localhost
 
 1. need to run outside of bazel to generate first snapshot (`yarn jest -u`)
 1. jest config different with and without bazel (tsconfig paths)
-1. need to rename snapsnot s/ts/js because filename is js through bazel
 
 ## TODO
 
