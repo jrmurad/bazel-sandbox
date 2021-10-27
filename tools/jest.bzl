@@ -1,5 +1,6 @@
 "jest"
 
+load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load("@npm//jest-cli:index.bzl", "jest", _jest_test = "jest_test")
 
 def jest_test(name, srcs, data = [], jest_config = "//:jest.config.js", **kwargs):
@@ -34,8 +35,25 @@ def jest_test(name, srcs, data = [], jest_config = "//:jest.config.js", **kwargs
         **kwargs
     )
 
+    # Make sure the update command runs with a working directory in the workspace
+    # so that any created snapshot files are in the sources, not in the runfiles
+    write_file(
+        name = "chdir",
+        out = "chdir.js",
+        content = [
+            # cd /path/to/workspace
+            "process.chdir(process.env['BUILD_WORKSPACE_DIRECTORY'])",
+            # cd subdir/package
+            "process.chdir('%s')" % native.package_name() if native.package_name() else "",
+        ],
+    )
+
     jest(
         name = name + ".update",
-        data = all_data,
-        templated_args = templated_args + ["-u"],
+        data = all_data + ["chdir.js"],
+        templated_args = templated_args + [
+            "--updateSnapshot",
+            "--runInBand",
+            "--node_options=--require=$(rootpath chdir.js)",
+        ],
     )
