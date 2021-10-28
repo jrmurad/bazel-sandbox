@@ -1,6 +1,6 @@
 module.exports = {
   moduleNameMapper: {
-    "^unity/(.*)": "<rootDir>/$1",
+    "^unity/(.*)": `${process.env.RUNFILES}/unity/$1`,
   },
   testEnvironment: "jsdom",
   transform: {

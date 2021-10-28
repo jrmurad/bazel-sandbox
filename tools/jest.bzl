@@ -40,20 +40,15 @@ def jest_test(name, srcs, data = [], jest_config = "//:jest.config.js", **kwargs
     write_file(
         name = "chdir",
         out = "chdir.js",
-        content = [
-            # cd /path/to/workspace
-            "process.chdir(process.env['BUILD_WORKSPACE_DIRECTORY'])",
-            # cd subdir/package
-            "process.chdir('%s')" % native.package_name() if native.package_name() else "",
-        ],
+        content = ["process.chdir(process.env['BUILD_WORKSPACE_DIRECTORY'])"],
     )
 
     jest(
         name = name + ".update",
         data = all_data + ["chdir.js"],
         templated_args = templated_args + [
-            "--updateSnapshot",
+            "--node_options=--require=./$(rootpath chdir.js)",
             "--runInBand",
-            "--node_options=--require=$(rootpath chdir.js)",
+            "--updateSnapshot",
         ],
     )

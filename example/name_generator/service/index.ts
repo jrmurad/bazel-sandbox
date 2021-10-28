@@ -9,9 +9,7 @@ import {
 import yargs from "yargs/yargs";
 
 const argv = yargs(process.argv.slice(2))
-  .options({
-    port: { type: "number" },
-  })
+  .options({ port: { type: "number" } })
   .parseSync();
 
 const server = new grpc.Server();
