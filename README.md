@@ -20,13 +20,13 @@ enable Chrome flag: #allow-insecure-localhost
 
     grpcurl -insecure -proto ./example/name_generator/proto/v1/name_generator_service.proto 127.0.0.1:8443 example.name_generator.proto.v1.NameGeneratorService/GetRandomName
 
-    bazel run //example/ui
+    bazel run //example/frontend
 
 ### Storyshots
 
-    bazel test //example/name_generator/ui:storyshots
+    bazel test //example/name_generator/frontend:storyshots
 
-    bazel run //example/name_generator/ui:storyshots.update
+    bazel run //example/name_generator/frontend:storyshots.update
 
 ## TODO
 
