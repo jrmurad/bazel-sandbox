@@ -83,3 +83,7 @@ gazelle_protobuf_extension_go_deps()
 load("@build_stack_rules_proto//deps:protobuf_core_deps.bzl", "protobuf_core_deps")
 
 protobuf_core_deps()
+
+load("@build_stack_rules_proto//deps:ts_proto_deps.bzl", "ts_proto_deps")
+
+ts_proto_deps()
