@@ -3,11 +3,13 @@
     "baseUrl": ".",
     "declaration": true,
     "esModuleInterop": true,
+    "experimentalDecorators": true,
     "jsx": "react",
     "lib": ["DOM", "ES2015"],
     "paths": {
       "unity/*": [
         "*",
+        "bazel-bin/*",
         "bazel-out/darwin-dbg/bin/*",
         "bazel-out/darwin-fastbuild/bin/*",
         "bazel-out/k8-dbg/bin/*",

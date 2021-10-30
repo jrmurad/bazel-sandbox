@@ -4,6 +4,6 @@ package example.name_generator.proto.v1;
 
 import "example/name_generator/proto/v1/name_generator.proto";
 
-service NameGeneratorService {
+service NameGenerator {
   rpc GetRandomName(GetRandomNameRequest) returns (GetRandomNameResponse);
 }

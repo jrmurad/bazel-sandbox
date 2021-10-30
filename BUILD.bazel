@@ -1,6 +1,22 @@
+load("@bazel_gazelle//:def.bzl", "gazelle", "gazelle_binary")
 load("@build_bazel_rules_nodejs//:index.bzl", "copy_to_bin")
 
 package(default_visibility = ["//visibility:public"])
+
+gazelle_binary(
+    name = "gazelle-protobuf",
+    languages = [
+        "@bazel_gazelle//language/proto",
+
+        # must be after the proto extension (order matters)
+        "@build_stack_rules_proto//language/protobuf",
+    ],
+)
+
+gazelle(
+    name = "gazelle",
+    gazelle = ":gazelle-protobuf",
+)
 
 # these files are needed when npm_package_bin is used to build storybook
 copy_to_bin(
@@ -19,3 +35,29 @@ exports_files([
     "rollup.config.js",
     "tsconfig.json",
 ])
+
+## Core ##
+# gazelle:exclude node_modules
+# gazelle:proto_rule proto_compile implementation stackb:rules_proto:proto_compile
+# gazelle:proto_rule proto_ts_library attr args --esModuleInterop
+## gazelle:proto_rule proto_ts_library attr args --lib ES2015
+# gazelle:proto_rule ts_proto_library implementation stackb:rules_proto:ts_proto_library
+
+## ts-proto ##
+# gazelle:proto_plugin ts_proto implementation stephenh:ts-proto:protoc-gen-ts-proto
+# gazelle:proto_plugin ts_proto option emitImportedFiles=false
+# gazelle:proto_plugin ts_proto option esModuleInterop=true
+# gazelle:proto_plugin ts_proto option oneof=unions
+# gazelle:proto_plugin ts_proto option outputServices=grpc-js
+# gazelle:proto_plugin ts_proto option stringEnums=true
+# gazelle:proto_plugin ts_proto option useOptionals=true
+
+# gazelle:proto_rule proto_ts_library implementation stackb:rules_proto:proto_ts_library
+# gazelle:proto_rule proto_ts_library attr tsc @npm//typescript/bin:tsc
+# gazelle:proto_rule proto_ts_library deps @npm//@grpc/grpc-js
+# gazelle:proto_rule proto_ts_library deps @npm//long
+# gazelle:proto_rule proto_ts_library deps @npm//protobufjs
+
+# gazelle:proto_language ts_proto plugin ts_proto
+# gazelle:proto_language ts_proto rule proto_compile
+# gazelle:proto_language ts_proto rule proto_ts_library

@@ -11,7 +11,7 @@ ts_project(
     declaration = True,
     tsconfig = "//:tsconfig.json",
     deps = [
-        "//example/name_generator/ui",
+        "//example/name_generator/frontend",
     ],
 )
 
@@ -30,15 +30,15 @@ rollup_bundle(
 )
 
 live_server(
-    name = "ui",
+    name = "frontend",
     data = [
         "index.html",
         ":bundle",
     ],
     templated_args = [
-        "./example/ui",
+        "./example/frontend",
         "--entry-file=index.html",
-        "--mount=/bundle.js:example/ui/bundle/bundle.js",
+        "--mount=/bundle.js:example/frontend/bundle/bundle.js",
         "--no-browser",
     ],
 )

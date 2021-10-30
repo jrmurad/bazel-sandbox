@@ -1,0 +1,30 @@
+load("@build_stack_rules_proto//rules:proto_plugin.bzl", "proto_plugin")
+
+proto_plugin(
+    name = "protoc-gen-ts-proto",
+    data = [
+        "@build_bazel_rules_nodejs//toolchains/node:node_bin",
+        "@npm//:node_modules",
+    ],
+    tool = ":ts-proto.sh",
+    visibility = ["//visibility:public"],
+)
+
+genrule(
+    name = "ts-proto",
+    srcs = [
+        "@npm//:BUILD.bazel",
+        "@npm//:node_modules",
+    ],
+    outs = ["ts-proto.sh"],
+    cmd = """
+    cat << EOF > $@
+#!/bin/bash
+set -euox pipefail
+$(execpath @build_bazel_rules_nodejs//toolchains/node:node_bin) \
+    --eval "require('./$$(dirname $(execpath @npm//:BUILD.bazel))/node_modules/ts-proto/build/plugin.js')"
+EOF
+    """,
+    executable = True,
+    tools = ["@build_bazel_rules_nodejs//toolchains/node:node_bin"],
+)

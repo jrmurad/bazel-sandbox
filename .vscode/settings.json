@@ -11,4 +11,16 @@
     "yarn.lock": true
   },
   "typescript.tsdk": "node_modules/typescript/lib",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[proto3]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

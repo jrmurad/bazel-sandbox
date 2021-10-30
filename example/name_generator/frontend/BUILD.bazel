@@ -3,7 +3,7 @@ load("@npm//@bazel/typescript:index.bzl", "ts_project")
 load("//:tools/jest.bzl", "jest_test")
 
 ts_project(
-    name = "ui",
+    name = "frontend",
     srcs = glob(
         ["**/*.tsx"],
         exclude = ["**/*.stories.tsx"],
@@ -12,12 +12,9 @@ ts_project(
     tsconfig = "//:tsconfig.json",
     visibility = ["//example:__subpackages__"],
     deps = [
-        "//example/name_generator/proto/v1:web_lib",
-        "@npm//@types/google-protobuf",
+        "//example/name_generator/proto/v1:example_name_generator_proto_v1_ts_proto_web",
         "@npm//@types/react",
         "@npm//@types/react-dom",
-        "@npm//google-protobuf",
-        "@npm//grpc-web",
         "@npm//react",
         "@npm//react-dom",
     ],
@@ -35,8 +32,8 @@ npm_package_bin(
         "--output-dir bazel-out/k8-fastbuild/bin/storybook-static",
     ],
     data = [
+        ":frontend",
         ":stories",
-        ":ui",
         "//:storybook_data_copy",
         "//:tsconfig.json",
         "@npm//tsconfig-paths-webpack-plugin",
@@ -53,7 +50,7 @@ jest_test(
     ],
     data = [
         # ":storybook",
-        ":ui",
+        ":frontend",
         "//:.storybook",
         "//:babel.config.js",
         "//:package.json",

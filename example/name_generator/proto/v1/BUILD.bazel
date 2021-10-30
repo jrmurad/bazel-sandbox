@@ -1,30 +1,88 @@
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("@rules_proto_grpc//js:defs.bzl", "js_grpc_node_library", "js_grpc_web_library")
+load("@build_stack_rules_proto//rules/ts:proto_ts_library.bzl", "proto_ts_library")
+load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 
 package(default_visibility = ["//example:__subpackages__"])
 
 proto_library(
-    name = "v1",
-    srcs = glob(["*.proto"]),
-    visibility = ["//example:__subpackages__"],
-    deps = ["//example/common/naming/proto/v1"],
+    name = "example_name_generator_proto_v1_proto",
+    srcs = [
+        "name_generator.proto",
+        "name_generator_service.proto",
+    ],
+    deps = ["//example/common/naming/proto/v1:example_common_naming_proto_v1_proto"],
 )
 
-js_grpc_node_library(
-    name = "js_lib",
-    options = {
-        "//js:grpc_node_ts_plugin": ["mode=grpc-js"],
-    },
-    protos = [
-        ":v1",
-        "//example/common/naming/proto/v1",  # JRM: shouldn't have to specify this?
+proto_compile(
+    name = "example_name_generator_proto_v1_ts_proto_compile",
+    options = {"//tools/ts-proto:protoc-gen-ts-proto": [
+        "emitImportedFiles=false",
+        "esModuleInterop=true",
+        "oneof=unions",
+        "stringEnums=true",
+        "outputServices=grpc-js",
+        "useOptionals=true",
+    ]},
+    outputs = [
+        "name_generator.ts",
+        "name_generator_service.ts",
+    ],
+    plugins = ["//tools/ts-proto:protoc-gen-ts-proto"],
+    proto = "example_name_generator_proto_v1_proto",
+)
+
+proto_ts_library(
+    name = "example_name_generator_proto_v1_ts_proto",
+    srcs = [
+        "name_generator.ts",
+        "name_generator_service.ts",
+    ],
+    args = [
+        "--esModuleInterop",
+        "--lib ES2015",
+    ],
+    tsc = "@npm//typescript/bin:tsc",
+    deps = [
+        "//example/common/naming/proto/v1:example_common_naming_proto_v1_ts_proto",
+        "@npm//@grpc/grpc-js",
+        "@npm//long",
+        "@npm//protobufjs",
     ],
 )
 
-js_grpc_web_library(
-    name = "web_lib",
-    protos = [
-        ":v1",
-        "//example/common/naming/proto/v1",  # JRM: shouldn't have to specify this?
+proto_compile(
+    name = "example_name_generator_proto_v1_ts_proto_web_compile",
+    options = {"//tools/ts-proto:protoc-gen-ts-proto": [
+        "emitImportedFiles=false",
+        "esModuleInterop=true",
+        "oneof=unions",
+        "stringEnums=true",
+        "outputClientImpl=grpc-web",
+        "useOptionals=true",
+    ]},
+    outputs = [
+        "name_generator_service_web.ts",
+        "name_generator_web.ts",
+    ],
+    plugins = ["//tools/ts-proto:protoc-gen-ts-proto"],
+    proto = "example_name_generator_proto_v1_proto",
+)
+
+proto_ts_library(
+    name = "example_name_generator_proto_v1_ts_proto_web",
+    srcs = [
+        "name_generator_service_web.ts",
+        "name_generator_web.ts",
+    ],
+    args = [
+        "--esModuleInterop",
+        "--lib DOM,ES2015",
+    ],
+    tsc = "@npm//typescript/bin:tsc",
+    deps = [
+        "//example/common/naming/proto/v1:example_common_naming_proto_v1_ts_proto_web",
+        "@npm//@improbable-eng/grpc-web",
+        "@npm//long",
+        "@npm//protobufjs",
     ],
 )
