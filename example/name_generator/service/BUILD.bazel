@@ -4,7 +4,7 @@ load("@npm//@bazel/typescript:index.bzl", "ts_project")
 PORT = 50051
 
 ts_project(
-    name = "index_ts",
+    name = "main",
     srcs = glob(
         ["**/*.ts"],
         exclude = ["**/*.test.ts"],
@@ -14,11 +14,18 @@ ts_project(
     deps = [
         "//example/name_generator/proto/v1:example_name_generator_proto_v1_ts_proto_compile",
         "@npm//@grpc/grpc-js",
+        "@npm//@grpc/proto-loader",
+        "@npm//@nestjs/common",
+        "@npm//@nestjs/core",
+        "@npm//@nestjs/microservices",
         "@npm//@types/faker",
-        "@npm//@types/google-protobuf",
+        "@npm//@types/node",
         "@npm//@types/yargs",
         "@npm//faker",
         "@npm//google-protobuf",
+        "@npm//long",
+        "@npm//protobufjs",
+        "@npm//rxjs",
         "@npm//yargs",
     ],
 )
@@ -26,8 +33,8 @@ ts_project(
 nodejs_binary(
     name = "service",
     args = ["--bazel_patch_module_resolver"],
-    data = [":index_ts"],
-    entry_point = ":index.ts",
+    data = [":main"],
+    entry_point = ":main.ts",
     templated_args = ["--port={}".format(PORT)],
 )
 

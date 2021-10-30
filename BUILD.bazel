@@ -36,8 +36,19 @@ exports_files([
     "tsconfig.json",
 ])
 
+## Core ##
 # gazelle:proto_rule proto_compile implementation stackb:rules_proto:proto_compile
+# gazelle:proto_rule ts_proto_library implementation stackb:rules_proto:ts_proto_library
+
+## ts-proto ##
 # gazelle:proto_plugin ts_proto implementation stephenh:ts-proto:protoc-gen-ts-proto
+# gazelle:proto_plugin ts_proto option context=true
 # gazelle:proto_plugin ts_proto option emitImportedFiles=false
+# gazelle:proto_plugin ts_proto option esModuleInterop=true
+# gazelle:proto_plugin ts_proto option nestJs=true
+# gazelle:proto_plugin ts_proto option oneof=unions
+# gazelle:proto_plugin ts_proto option returnObservable=true
+# gazelle:proto_plugin ts_proto option stringEnums=true
+# gazelle:proto_plugin ts_proto option useOptionals=true
 # gazelle:proto_language ts_proto plugin ts_proto
 # gazelle:proto_language ts_proto rule proto_compile

@@ -9,8 +9,8 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "build_bazel_rules_nodejs",
-    sha256 = "e79c08a488cc5ac40981987d862c7320cee8741122a2649e9b08e850b6f20442",
-    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/3.8.0/rules_nodejs-3.8.0.tar.gz"],
+    sha256 = "3aa6296f453ddc784e1377e0811a59e1e6807da364f44b27856e34f5042043fe",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/4.4.2/rules_nodejs-4.4.2.tar.gz"],
 )
 
 load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "yarn_install")
@@ -30,9 +30,9 @@ yarn_install(
 
 http_archive(
     name = "build_stack_rules_proto",
-    sha256 = "f46b8d3ce8708120ea0643a1211b57cb59c0da3e92302c68ee003dfa8acf6814",
-    strip_prefix = "rules_proto-cf3f47ea65021dc5b23b229e93be61dc191a7aba",
-    urls = ["https://github.com/stackb/rules_proto/archive/cf3f47ea65021dc5b23b229e93be61dc191a7aba.tar.gz"],
+    sha256 = "565c8e9892aa4bdf1fc83342bd935c58b3e4daef56e2f1d8ed1633c78a93d8b3",
+    strip_prefix = "rules_proto-1c8afa18d5dd347f7b46fb74022673bc26d6a20d",
+    urls = ["https://github.com/stackb/rules_proto/archive/1c8afa18d5dd347f7b46fb74022673bc26d6a20d.tar.gz"],
 )
 
 register_toolchains("@build_stack_rules_proto//toolchain:standard")
