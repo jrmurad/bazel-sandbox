@@ -37,12 +37,12 @@ exports_files([
 ])
 
 ## Core ##
+# gazelle:exclude node_modules
 # gazelle:proto_rule proto_compile implementation stackb:rules_proto:proto_compile
 # gazelle:proto_rule ts_proto_library implementation stackb:rules_proto:ts_proto_library
 
 ## ts-proto ##
 # gazelle:proto_plugin ts_proto implementation stephenh:ts-proto:protoc-gen-ts-proto
-# gazelle:proto_plugin ts_proto option context=true
 # gazelle:proto_plugin ts_proto option emitImportedFiles=false
 # gazelle:proto_plugin ts_proto option esModuleInterop=true
 # gazelle:proto_plugin ts_proto option nestJs=true
