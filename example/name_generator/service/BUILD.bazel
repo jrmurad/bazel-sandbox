@@ -12,7 +12,6 @@ ts_project(
     declaration = True,
     tsconfig = "//:tsconfig.json",
     deps = [
-        "//common:helpers",
         "//example/common/naming/proto/v1:example_common_naming_proto_v1_ts_proto",
         "//example/name_generator/proto/v1:example_name_generator_proto_v1_ts_proto",
         "@npm//@types/faker",

@@ -1,15 +1,34 @@
-import { bootstrap } from "unity/common/helpers";
-import { EXAMPLE_NAME_GENERATOR_PROTO_V1_PACKAGE_NAME } from "unity/example/name_generator/proto/v1/name_generator_service";
+import * as grpc from "@grpc/grpc-js";
+import faker from "faker";
+import { Title } from "unity/example/common/naming/proto/v1/naming";
+import {
+  NameGeneratorServer,
+  NameGeneratorService,
+} from "unity/example/name_generator/proto/v1/name_generator_service";
 import yargs from "yargs/yargs";
-import { AppModule } from "./name_generator.app";
 
 const argv = yargs(process.argv.slice(2))
-  .options({ port: { default: 5000, type: "number" } })
+  .options({ port: { type: "number" } })
   .parseSync();
 
-bootstrap(
-  AppModule,
-  EXAMPLE_NAME_GENERATOR_PROTO_V1_PACKAGE_NAME,
-  "NameGeneratorService",
-  argv.port
+const server = new grpc.Server();
+
+server.addService(NameGeneratorService, {
+  getRandomName: (call, callback) => {
+    callback(null, {
+      name: {
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        title: Title.TITLE_DR, // JRM FIXME patch proto2 optional
+      },
+    });
+  },
+} as NameGeneratorServer);
+
+server.bindAsync(
+  `127.0.0.1:${argv.port}`,
+  grpc.ServerCredentials.createInsecure(),
+  () => {
+    server.start();
+  }
 );
