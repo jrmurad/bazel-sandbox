@@ -22,6 +22,7 @@ node_repositories(
 yarn_install(
     name = "npm",
     data = [
+        "//:patches/@grpc+proto-loader+0.6.6.patch",
         "//:patches/ts-proto+1.83.3.patch",
     ],
     frozen_lockfile = True,

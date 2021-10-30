@@ -33,6 +33,7 @@ proto_ts_library(
     ],
     tsc = "@npm//typescript/bin:tsc",
     deps = [
+        "@npm//@grpc/grpc-js",
         "@npm//long",
         "@npm//protobufjs",
     ],
