@@ -35,20 +35,12 @@ enable Chrome flag: #allow-insecure-localhost
 1. prove grpc-web works in production
 1. prove that a create-react-app project can use bazel-built npm package within
    monorepo
-1. jest
-1. storyshots (html and image)
+1. storyshots (images with docker)
 
 ### Should Have
 
-1. upgrade to v4 of rules-proto-grpc (currently broken: [Issue
-   2910](https://github.com/bazelbuild/rules_nodejs/issues/2910))
-1. why is it necessary to be explicit with transitive dependency?
-1. is there a way around the awful import paths?
-1. JS objects rather than "builder" style (if we're going to use this, might as
-   well go to proto3? scala issues?)
+1. patch ts-proto proto2 optional
 
 ### Nice to Have
 
-1. attempt to use ts-proto?
-1. attempt to use nestjs?
 1. possible to get grpc-web generated string enums?
