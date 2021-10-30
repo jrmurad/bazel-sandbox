@@ -1,4 +1,5 @@
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
+load("@build_stack_rules_proto//rules/ts:ts_proto_library.bzl", "ts_proto_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 
 package(default_visibility = ["//example:__subpackages__"])
@@ -22,4 +23,9 @@ proto_compile(
     outputs = ["naming.ts"],
     plugins = ["@build_stack_rules_proto//plugin/stephenh/ts-proto:protoc-gen-ts-proto"],
     proto = "example_common_naming_proto_v1_proto",
+)
+
+ts_proto_library(
+    name = "example_common_naming_proto_v1_ts_proto",
+    srcs = [":example_common_naming_proto_v1_ts_proto_compile"],
 )

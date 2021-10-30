@@ -42,7 +42,7 @@ export function getGrpcOptions(
       loader: { includeDirs: [root] },
       package: packageName,
       protoPath,
-      url: `0.0.0.0:${port}`,
+      url: `127.0.0.1:${port}`,
     },
     transport: Transport.GRPC,
   };
