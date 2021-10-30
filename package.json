@@ -53,6 +53,8 @@
     "jest-cli": "^27.3.1",
     "live-server": "^1.2.1",
     "long": "^5.1.0",
+    "patch-package": "^6.4.7",
+    "postinstall-postinstall": "^2.1.0",
     "prettier": "^2.4.1",
     "protobufjs": "^6.11.2",
     "puppeteer": "^10.4.0",
@@ -61,5 +63,8 @@
     "ts-protoc-gen": "^0.15.0",
     "tsconfig-paths-webpack-plugin": "^3.5.1",
     "typescript": "^4.4.4"
+  },
+  "scripts": {
+    "postinstall": "patch-package"
   }
 }

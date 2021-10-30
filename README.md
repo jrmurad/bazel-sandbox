@@ -10,7 +10,7 @@ sandbox will attempt to minimize deviation from the norm.
 
     bazel run //example/name_generator/service
 
-    grpcurl -plaintext -proto ./example/name_generator/proto/v1/name_generator_service.proto 127.0.0.1:50051 example.name_generator.proto.v1.NameGeneratorService/GetRandomName`
+    grpcurl -plaintext -proto ./example/name_generator/proto/v1/name_generator_service.proto 127.0.0.1:50051 example.name_generator.proto.v1.NameGenerator/GetRandomName`
 
 ### Web
 
@@ -18,7 +18,7 @@ enable Chrome flag: #allow-insecure-localhost
 
     bazel run //example/name_generator/service:grpcwebproxy
 
-    grpcurl -insecure -proto ./example/name_generator/proto/v1/name_generator_service.proto 127.0.0.1:8443 example.name_generator.proto.v1.NameGeneratorService/GetRandomName
+    grpcurl -insecure -proto ./example/name_generator/proto/v1/name_generator_service.proto 127.0.0.1:8443 example.name_generator.proto.v1.NameGenerator/GetRandomName
 
     bazel run //example/frontend
 
@@ -40,6 +40,7 @@ enable Chrome flag: #allow-insecure-localhost
 ### Should Have
 
 1. patch ts-proto proto2 optional
+1. PR rules_proto with esModuleInterop so we don't need to patch proto-loader?
 
 ### Nice to Have
 

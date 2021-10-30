@@ -27,5 +27,4 @@ proto_compile(
 ts_proto_library(
     name = "example_common_naming_proto_v1_ts_proto",
     srcs = [":example_common_naming_proto_v1_ts_proto_compile"],
-    deps = ["@npm//rxjs"],
 )

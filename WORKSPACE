@@ -21,6 +21,9 @@ node_repositories(
 
 yarn_install(
     name = "npm",
+    data = [
+        "//:patches/@grpc+proto-loader+0.6.6.patch",
+    ],
     frozen_lockfile = True,
     package_json = "//:package.json",
     yarn_lock = "//:yarn.lock",
