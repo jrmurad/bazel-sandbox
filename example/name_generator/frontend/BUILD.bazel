@@ -3,7 +3,7 @@ load("@npm//@bazel/typescript:index.bzl", "ts_project")
 load("//:tools/jest.bzl", "jest_test")
 
 ts_project(
-    name = "ui",
+    name = "frontend",
     srcs = glob(
         ["**/*.tsx"],
         exclude = ["**/*.stories.tsx"],

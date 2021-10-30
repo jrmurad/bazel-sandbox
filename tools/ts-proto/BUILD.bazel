@@ -1,4 +1,3 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 load("@build_stack_rules_proto//rules:proto_plugin.bzl", "proto_plugin")
 
 proto_plugin(
@@ -7,40 +6,25 @@ proto_plugin(
         "@build_bazel_rules_nodejs//toolchains/node:node_bin",
         "@npm//:node_modules",
     ],
-    tool = ":ts-proto",
+    tool = ":ts-proto.sh",
     visibility = ["//visibility:public"],
 )
 
 genrule(
-    name = "config",
-    srcs = ["@build_bazel_rules_nodejs//toolchains/node:node_bin"],
-    outs = ["config.go"],
+    name = "ts-proto",
+    srcs = [
+        "@npm//:BUILD.bazel",
+        "@npm//:node_modules",
+    ],
+    outs = ["ts-proto.sh"],
     cmd = """
-cat << EOF > $@
-package main
-
-var (
-    nodeBin = "external/$(NODE_PATH)"
-    npmWorkspaceFile = "$(location @npm//:BUILD.bazel)"
-)
+    cat << EOF > $@
+#!/bin/bash
+set -euox pipefail
+$(execpath @build_bazel_rules_nodejs//toolchains/node:node_bin) \
+    --eval "require('./$$(dirname $(execpath @npm//:BUILD.bazel))/node_modules/ts-proto/build/plugin.js')"
 EOF
     """,
-    toolchains = ["@build_bazel_rules_nodejs//toolchains/node:toolchain"],
-    tools = ["@npm//:BUILD.bazel"],
-)
-
-go_library(
-    name = "ts-proto_lib",
-    srcs = [
-        "config.go",
-        "protoc-gen-ts-proto.go",
-    ],
-    importpath = "github.com/stackb/rules_proto/plugin/stephenh/ts-proto",
-    visibility = ["//visibility:private"],
-)
-
-go_binary(
-    name = "ts-proto",
-    embed = [":ts-proto_lib"],
-    visibility = ["//visibility:public"],
+    executable = True,
+    tools = ["@build_bazel_rules_nodejs//toolchains/node:node_bin"],
 )

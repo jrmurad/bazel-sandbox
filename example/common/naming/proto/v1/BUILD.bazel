@@ -1,6 +1,6 @@
-load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
-load("@build_stack_rules_proto//rules/ts:ts_proto_library.bzl", "ts_proto_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@build_stack_rules_proto//rules/ts:proto_ts_library.bzl", "proto_ts_library")
+load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 
 package(default_visibility = ["//example:__subpackages__"])
 
@@ -24,9 +24,18 @@ proto_compile(
     proto = "example_common_naming_proto_v1_proto",
 )
 
-ts_proto_library(
+proto_ts_library(
     name = "example_common_naming_proto_v1_ts_proto",
-    srcs = [":example_common_naming_proto_v1_ts_proto_compile"],
+    srcs = ["naming.ts"],
+    args = [
+        "--esModuleInterop",
+        "--lib ES2015",
+    ],
+    tsc = "@npm//typescript/bin:tsc",
+    deps = [
+        "@npm//long",
+        "@npm//protobufjs",
+    ],
 )
 
 proto_compile(
@@ -44,7 +53,16 @@ proto_compile(
     proto = "example_common_naming_proto_v1_proto",
 )
 
-ts_proto_library(
+proto_ts_library(
     name = "example_common_naming_proto_v1_ts_proto_web",
     srcs = [":example_common_naming_proto_v1_ts_proto_web_compile"],
+    args = [
+        "--esModuleInterop",
+        "--lib DOM,ES2015",
+    ],
+    tsc = "@npm//typescript/bin:tsc",
+    deps = [
+        "@npm//long",
+        "@npm//protobufjs",
+    ],
 )

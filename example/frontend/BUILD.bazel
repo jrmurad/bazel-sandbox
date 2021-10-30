@@ -30,7 +30,7 @@ rollup_bundle(
 )
 
 live_server(
-    name = "ui",
+    name = "frontend",
     data = [
         "index.html",
         ":bundle",
