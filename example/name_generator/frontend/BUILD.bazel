@@ -32,8 +32,8 @@ npm_package_bin(
         "--output-dir bazel-out/k8-fastbuild/bin/storybook-static",
     ],
     data = [
+        ":frontend",
         ":stories",
-        ":ui",
         "//:storybook_data_copy",
         "//:tsconfig.json",
         "@npm//tsconfig-paths-webpack-plugin",
@@ -50,7 +50,7 @@ jest_test(
     ],
     data = [
         # ":storybook",
-        ":ui",
+        ":frontend",
         "//:.storybook",
         "//:babel.config.js",
         "//:package.json",
