@@ -23,6 +23,7 @@ yarn_install(
     name = "npm",
     data = [
         "//:patches/@grpc+proto-loader+0.6.6.patch",
+        "//:patches/ts-proto+1.83.3.patch",
     ],
     frozen_lockfile = True,
     package_json = "//:package.json",
@@ -79,12 +80,6 @@ gazelle_protobuf_extension_go_deps()
 load("@build_stack_rules_proto//deps:nodejs_deps.bzl", "nodejs_deps")
 
 nodejs_deps()
-
-# --- npm_ts_proto ---
-
-load("@build_stack_rules_proto//deps:ts_proto_deps.bzl", "ts_proto_deps")
-
-ts_proto_deps()
 
 # --- other --- #
 

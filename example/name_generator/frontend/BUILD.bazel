@@ -12,12 +12,9 @@ ts_project(
     tsconfig = "//:tsconfig.json",
     visibility = ["//example:__subpackages__"],
     deps = [
-        "//example/name_generator/proto/v1:web_lib",
-        "@npm//@types/google-protobuf",
+        "//example/name_generator/proto/v1:example_name_generator_proto_v1_ts_proto_web",
         "@npm//@types/react",
         "@npm//@types/react-dom",
-        "@npm//google-protobuf",
-        "@npm//grpc-web",
         "@npm//react",
         "@npm//react-dom",
     ],

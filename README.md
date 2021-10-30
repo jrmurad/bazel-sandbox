@@ -33,6 +33,7 @@ enable Chrome flag: #allow-insecure-localhost
 ### Must Have
 
 1. prove grpc-web works in production
+1. different outputs for grpc-web
 1. prove that a create-react-app project can use bazel-built npm package within
    monorepo
 1. storyshots (images with docker)
@@ -41,7 +42,3 @@ enable Chrome flag: #allow-insecure-localhost
 
 1. patch ts-proto proto2 optional
 1. PR rules_proto with esModuleInterop so we don't need to patch proto-loader?
-
-### Nice to Have
-
-1. possible to get grpc-web generated string enums?
