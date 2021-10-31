@@ -36,11 +36,12 @@ exports_files([
     "tsconfig.json",
 ])
 
-## Core ##
+## core ##
 # gazelle:exclude node_modules
 # gazelle:proto_rule proto_compile implementation stackb:rules_proto:proto_compile
+# gazelle:proto_rule proto_compile attr plugins //tools/ts-proto:protoc-gen-ts-proto
 # gazelle:proto_rule proto_ts_library attr args --esModuleInterop
-## gazelle:proto_rule proto_ts_library attr args --lib ES2015
+# gazelle:proto_rule proto_ts_library attr args --lib ES2015
 # gazelle:proto_rule ts_proto_library implementation stackb:rules_proto:ts_proto_library
 
 ## ts-proto ##
