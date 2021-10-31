@@ -1,26 +1,47 @@
+diff --git a/node_modules/ts-proto/build/.plugin.js.swp b/node_modules/ts-proto/build/.plugin.js.swp
+new file mode 100644
+index 0000000..bc3a196
+Binary files /dev/null and b/node_modules/ts-proto/build/.plugin.js.swp differ
 diff --git a/node_modules/ts-proto/build/main.js b/node_modules/ts-proto/build/main.js
-index 51918b7..7c9ea8b 100644
+index 51918b7..9832f97 100644
 --- a/node_modules/ts-proto/build/main.js
 +++ b/node_modules/ts-proto/build/main.js
+@@ -17,7 +17,7 @@ const schema_1 = require("./schema");
+ const ConditionalOutput_1 = require("ts-poet/build/ConditionalOutput");
+ const generate_grpc_js_1 = require("./generate-grpc-js");
+ const generate_generic_service_definition_1 = require("./generate-generic-service-definition");
+-function generateFile(ctx, fileDesc) {
++function generateFile(ctx, fileDesc, moduleNameOverride) {
+     var _a;
+     const { options, utils } = ctx;
+     // Google's protofiles are organized like Java, where package == the folder the file
 @@ -31,7 +31,7 @@ function generateFile(ctx, fileDesc) {
      //
      // We'll also assume that the fileDesc.name is already the `company/foo.proto` path, with
      // the package already implicitly in it, so we won't re-append/strip/etc. it out/back in.
 -    const moduleName = fileDesc.name.replace('.proto', '.ts');
-+    const moduleName = fileDesc.name.replace('.proto', options.outputClientImpl === 'grpc-web' && fileDesc.service.length > 0 ? '_web.ts' : '.ts');
++    const moduleName = moduleNameOverride || fileDesc.name.replace('.proto', '.ts');
      const chunks = [];
      // Indicate this file's source protobuf package for reflective use with google.protobuf.Any
      if (options.exportCommonSymbols) {
-diff --git a/node_modules/ts-proto/build/types.js b/node_modules/ts-proto/build/types.js
-index 41198a8..f6893be 100644
---- a/node_modules/ts-proto/build/types.js
-+++ b/node_modules/ts-proto/build/types.js
-@@ -280,7 +280,7 @@ function createTypeMap(request, options) {
-     const typeMap = new Map();
-     for (const file of request.protoFile) {
-         // We assume a file.name of google/protobuf/wrappers.proto --> a module path of google/protobuf/wrapper.ts
--        const moduleName = file.name.replace('.proto', '');
-+        const moduleName = file.name.replace('.proto', options.outputClientImpl === 'grpc-web' && file.name.match(/_service\.proto$/) ? '_web' : '');
-         // So given a fullName like FooMessage_InnerMessage, proto will see that as package.name.FooMessage.InnerMessage
-         function saveMapping(tsFullName, desc, s, protoFullName) {
-             // package is optional, but make sure we have a dot-prefixed type name either way
+diff --git a/node_modules/ts-proto/build/plugin.js b/node_modules/ts-proto/build/plugin.js
+index 809f5d7..8261a81 100644
+--- a/node_modules/ts-proto/build/plugin.js
++++ b/node_modules/ts-proto/build/plugin.js
+@@ -23,6 +23,16 @@ async function main() {
+         const spec = await code.toStringWithImports({ ...options_1.getTsPoetOpts(options), path });
+         return { name: path, content: utils_1.prefixDisableLinter(spec) };
+     }));
++    if (options.outputClientImpl === 'grpc-web' && options.outputServices === 'grpc-js') {
++        const grpcWebFiles = await Promise.all(filesToGenerate.filter(file => file.service.length > 0).map(async (file) => {
++            const moduleNameOverride = file.name.replace('.proto', '_web.ts');
++            const tweakedOptions = { ...options, outputServices: 'default' };
++            const [path, code] = main_1.generateFile({ typeMap, options: tweakedOptions, utils }, file, moduleNameOverride);
++            const spec = await code.toStringWithImports({ ...options_1.getTsPoetOpts(tweakedOptions), path });
++            return { name: path, content: utils_1.prefixDisableLinter(spec) };
++        }));
++        files.push(...grpcWebFiles)
++    }
+     if (options.outputTypeRegistry) {
+         const utils = main_1.makeUtils(options);
+         const ctx = { options, typeMap, utils };
