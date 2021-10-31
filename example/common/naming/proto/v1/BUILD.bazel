@@ -5,61 +5,30 @@ load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 package(default_visibility = ["//example:__subpackages__"])
 
 proto_library(
-    name = "example_common_naming_proto_v1_proto",
+    name = "naming_proto",
     srcs = ["naming.proto"],
 )
 
 proto_compile(
-    name = "example_common_naming_proto_v1_ts_proto_compile",
+    name = "naming_ts_proto_compile",
     options = {"//tools/ts-proto:protoc-gen-ts-proto": [
         "emitImportedFiles=false",
         "esModuleInterop=true",
         "oneof=unions",
-        "outputServices=grpc-js",
         "stringEnums=true",
         "useOptionals=true",
     ]},
     outputs = ["naming.ts"],
     plugins = ["//tools/ts-proto:protoc-gen-ts-proto"],
-    proto = "example_common_naming_proto_v1_proto",
+    proto = ":naming_proto",
 )
 
 proto_ts_library(
-    name = "example_common_naming_proto_v1_ts_proto",
+    name = "naming_ts_proto",
     srcs = ["naming.ts"],
     args = [
         "--esModuleInterop",
         "--lib ES2015",
-    ],
-    tsc = "@npm//typescript/bin:tsc",
-    deps = [
-        "@npm//@grpc/grpc-js",
-        "@npm//long",
-        "@npm//protobufjs",
-    ],
-)
-
-proto_compile(
-    name = "example_common_naming_proto_v1_ts_proto_web_compile",
-    options = {"//tools/ts-proto:protoc-gen-ts-proto": [
-        "emitImportedFiles=false",
-        "esModuleInterop=true",
-        "oneof=unions",
-        "outputClientImpl=grpc-web",
-        "stringEnums=true",
-        "useOptionals=true",
-    ]},
-    outputs = ["naming_web.ts"],
-    plugins = ["//tools/ts-proto:protoc-gen-ts-proto"],
-    proto = "example_common_naming_proto_v1_proto",
-)
-
-proto_ts_library(
-    name = "example_common_naming_proto_v1_ts_proto_web",
-    srcs = [":example_common_naming_proto_v1_ts_proto_web_compile"],
-    args = [
-        "--esModuleInterop",
-        "--lib DOM,ES2015",
     ],
     tsc = "@npm//typescript/bin:tsc",
     deps = [
