@@ -22,8 +22,8 @@ node_repositories(
 yarn_install(
     name = "npm",
     data = [
-        "//:patches/@grpc+proto-loader+0.6.6.patch",
-        "//:patches/ts-proto+1.83.3.patch",
+        "//:patches/npm/@grpc+proto-loader+0.6.6.patch",
+        "//:patches/npm/ts-proto+1.83.3.patch",
     ],
     frozen_lockfile = True,
     package_json = "//:package.json",
@@ -34,6 +34,8 @@ yarn_install(
 
 http_archive(
     name = "build_stack_rules_proto",
+    patch_args = ["-p1"],
+    patches = ["//:patches/bazel/rules_proto.patch"],
     sha256 = "8f294b46f490125b5f69b71080c5263ef8875bf3fc0c48b3e259dad765f4d1fd",
     strip_prefix = "rules_proto-8a3d37c45605582c0e905747a33c216ece66a805",
     urls = ["https://github.com/stackb/rules_proto/archive/8a3d37c45605582c0e905747a33c216ece66a805.tar.gz"],

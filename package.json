@@ -64,6 +64,6 @@
     "typescript": "^4.4.4"
   },
   "scripts": {
-    "postinstall": "patch-package"
+    "postinstall": "patch-package --patch-dir patches/npm"
   }
 }
