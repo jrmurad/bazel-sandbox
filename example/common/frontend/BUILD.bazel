@@ -8,8 +8,20 @@ ts_project(
     visibility = ["//example:__subpackages__"],
     deps = [
         "@npm//@types/react",
-        # "@npm//@types/react-dom",
         "@npm//react",
-        # "@npm//react-dom",
+    ],
+)
+
+ts_project(
+    name = "rpc_context",
+    srcs = ["RpcContext.ts"],
+    declaration = True,
+    tsconfig = "//:tsconfig.json",
+    visibility = ["//example:__subpackages__"],
+    deps = [
+        "@npm//@improbable-eng/grpc-web",
+        "@npm//@types/react",
+        "@npm//react",
+        "@npm//rxjs",
     ],
 )

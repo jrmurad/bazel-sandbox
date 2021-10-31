@@ -5,7 +5,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "jsx": "react",
-    "lib": ["DOM", "ES2015"],
+    "lib": ["DOM", "ES2016"],
     "paths": {
       "unity/*": [
         "*",

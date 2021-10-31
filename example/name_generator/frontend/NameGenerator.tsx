@@ -1,15 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { tap } from "rxjs";
-import {
-  GrpcWebImpl,
-  NameGeneratorClientImpl,
-} from "unity/example/name_generator/proto/v1/name_generator_service_web";
-
-// JRM FIXME sharable context
-const rpc = new GrpcWebImpl("https://127.0.0.1:8443", {});
-const nameGenerator = new NameGeneratorClientImpl(rpc);
+import { RpcContext } from "unity/example/common/frontend/RpcContext";
+import { NameGeneratorClientImpl } from "unity/example/name_generator/proto/v1/name_generator_service_web";
 
 export const NameGenerator: React.FC = () => {
+  const rpc = useContext(RpcContext);
+  const nameGenerator = new NameGeneratorClientImpl(rpc);
+
   const [name, setName] = useState<string | undefined>();
 
   const generateNewName = useCallback(async () => {
