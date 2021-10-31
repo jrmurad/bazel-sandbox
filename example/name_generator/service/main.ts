@@ -1,6 +1,6 @@
 import * as grpc from "@grpc/grpc-js";
 import faker from "faker";
-import { Title } from "unity/example/common/naming/proto/v1/naming";
+import { Title } from "unity/example/common/proto/naming/v1/naming";
 import {
   NameGeneratorServer,
   NameGeneratorService,

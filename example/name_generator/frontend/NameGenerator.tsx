@@ -27,3 +27,5 @@ export const NameGenerator: React.FC = () => {
     </>
   );
 };
+
+export default NameGenerator;

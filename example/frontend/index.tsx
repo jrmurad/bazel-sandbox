@@ -1,5 +1,18 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
-import { NameGenerator } from "unity/example/name_generator/frontend/NameGenerator";
+import { ErrorBoundary } from "../common/frontend/ErrorBoundary";
 
-ReactDOM.render(<NameGenerator />, document.getElementById("root"));
+const NameGenerator = React.lazy(
+  () => import("unity/example/name_generator/frontend/NameGenerator")
+);
+
+ReactDOM.render(
+  <div>
+    <ErrorBoundary>
+      <Suspense fallback={<div>Loading...</div>}>
+        <NameGenerator />
+      </Suspense>
+    </ErrorBoundary>
+  </div>,
+  document.getElementById("root")
+);

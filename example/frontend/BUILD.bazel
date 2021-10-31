@@ -11,6 +11,7 @@ ts_project(
     declaration = True,
     tsconfig = "//:tsconfig.json",
     deps = [
+        "//example/common/frontend:error_boundary",
         "//example/name_generator/frontend",
     ],
 )

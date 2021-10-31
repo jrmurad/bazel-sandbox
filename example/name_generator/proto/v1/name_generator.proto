@@ -2,10 +2,10 @@ syntax = "proto2";
 
 package example.name_generator.proto.v1;
 
-import "example/common/naming/proto/v1/naming.proto";
+import "example/common/proto/naming/v1/naming.proto";
 
 message GetRandomNameRequest {}
 
 message GetRandomNameResponse {
-  required example.common.naming.proto.v1.Name name = 1;
+  required example.common.proto.naming.v1.Name name = 1;
 }

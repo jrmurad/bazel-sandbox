@@ -5,12 +5,12 @@ load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 package(default_visibility = ["//example:__subpackages__"])
 
 proto_library(
-    name = "example_common_naming_proto_v1_proto",
+    name = "example_common_proto_naming_v1_proto",
     srcs = ["naming.proto"],
 )
 
 proto_compile(
-    name = "example_common_naming_proto_v1_ts_proto_compile",
+    name = "example_common_proto_naming_v1_ts_proto_compile",
     options = {"//tools/ts-proto:protoc-gen-ts-proto": [
         "emitImportedFiles=false",
         "esModuleInterop=true",
@@ -22,11 +22,11 @@ proto_compile(
     ]},
     outputs = ["naming.ts"],
     plugins = ["//tools/ts-proto:protoc-gen-ts-proto"],
-    proto = "example_common_naming_proto_v1_proto",
+    proto = "example_common_proto_naming_v1_proto",
 )
 
 proto_ts_library(
-    name = "example_common_naming_proto_v1_ts_proto",
+    name = "example_common_proto_naming_v1_ts_proto",
     srcs = ["naming.ts"],
     args = [
         "--esModuleInterop",
