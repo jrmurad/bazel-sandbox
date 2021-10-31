@@ -27,8 +27,7 @@ server.addService(NameGeneratorService, {
     callback(null, { name: generateRandomName() });
   },
 
-  // @ts-ignore // JRM FIXME why do I need explicit types?
-  streamRandomNames: (call, callback) => {
+  streamRandomNames: (call) => {
     timer(0, 1000)
       .pipe(
         map(generateRandomName),
