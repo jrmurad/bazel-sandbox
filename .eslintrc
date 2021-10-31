@@ -3,12 +3,7 @@
     "browser": true,
     "node": true
   },
-  "extends": [
-    "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "prettier/@typescript-eslint",
-    "prettier/react"
-  ],
+  "extends": ["plugin:@typescript-eslint/recommended", "prettier"],
   "globals": {
     "fin": "readonly"
   },
@@ -39,8 +34,15 @@
       "error",
       { "groups": [["^\\u0000", "^@?\\w", "^[^.]", "^\\."]] }
     ],
-    "sort-destructure-keys/sort-destructure-keys": ["error", { "caseSensitive": false }],
-    "sort-keys-fix/sort-keys-fix": ["error", "asc", { "caseSensitive": false, "natural": true }],
+    "sort-destructure-keys/sort-destructure-keys": [
+      "error",
+      { "caseSensitive": false }
+    ],
+    "sort-keys-fix/sort-keys-fix": [
+      "error",
+      "asc",
+      { "caseSensitive": false, "natural": true }
+    ],
     "typescript-sort-keys/interface": "error",
     "typescript-sort-keys/string-enum": "error"
   }
