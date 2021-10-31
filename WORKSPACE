@@ -96,7 +96,7 @@ http_archive(
 
 http_archive(
     name = "grpcwebproxy",
-    build_file = "//:grpcwebproxy.BUILD.bazel",
+    build_file = "//:tools/grpcwebproxy.BUILD.bazel",
     sha256 = "8b82b59bbc4338f48e8a9ff3f95c2c23929203d61e507829b78c2857df627dbd",
     urls = ["https://github.com/improbable-eng/grpc-web/releases/download/v0.14.1/grpcwebproxy-v0.14.1-linux-x86_64.zip"],
 )
