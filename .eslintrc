@@ -7,14 +7,6 @@
   "globals": {
     "fin": "readonly"
   },
-  "overrides": [
-    {
-      "files": ["*.stories.tsx"],
-      "rules": {
-        "@typescript-eslint/explicit-module-boundary-types": "off"
-      }
-    }
-  ],
   "plugins": [
     "@typescript-eslint",
     "jest",
