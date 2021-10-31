@@ -9,3 +9,9 @@ message GetRandomNameRequest {}
 message GetRandomNameResponse {
   required example.common.proto.naming.v1.Name name = 1;
 }
+
+message StreamRandomNamesRequest {}
+
+message StreamRandomNamesResponse {
+  required example.common.proto.naming.v1.Name name = 1;
+}

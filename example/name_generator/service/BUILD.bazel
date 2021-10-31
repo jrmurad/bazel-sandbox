@@ -18,6 +18,7 @@ ts_project(
         "@npm//@types/yargs",
         "@npm//faker",
         "@npm//long",
+        "@npm//rxjs",
         "@npm//yargs",
     ],
 )

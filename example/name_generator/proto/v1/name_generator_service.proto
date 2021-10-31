@@ -6,4 +6,6 @@ import "example/name_generator/proto/v1/name_generator.proto";
 
 service NameGenerator {
   rpc GetRandomName(GetRandomNameRequest) returns (GetRandomNameResponse);
+
+  rpc StreamRandomNames(StreamRandomNamesRequest) returns (stream StreamRandomNamesResponse);
 }

@@ -60,6 +60,7 @@ exports_files([
 # gazelle:proto_rule proto_ts_library deps @npm//@improbable-eng/grpc-web
 # gazelle:proto_rule proto_ts_library deps @npm//long
 # gazelle:proto_rule proto_ts_library deps @npm//protobufjs
+# gazelle:proto_rule proto_ts_library deps @npm//rxjs
 
 # gazelle:proto_language ts_proto plugin ts_proto
 # gazelle:proto_language ts_proto rule proto_compile

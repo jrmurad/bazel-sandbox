@@ -51,5 +51,6 @@ proto_ts_library(
         "@npm//@improbable-eng/grpc-web",
         "@npm//long",
         "@npm//protobufjs",
+        "@npm//rxjs",
     ],
 )

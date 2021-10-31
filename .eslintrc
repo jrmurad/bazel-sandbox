@@ -19,6 +19,7 @@
     "typescript-sort-keys"
   ],
   "rules": {
+    "no-console": "error",
     "prettier/prettier": "error",
     "react/jsx-sort-props": "error",
     "simple-import-sort/exports": "error",

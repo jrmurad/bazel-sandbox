@@ -1,0 +1,5 @@
+BasedOnStyle: Google
+---
+Language: Proto
+AllowShortBlocksOnASingleLine: Never
+ColumnLimit: 120

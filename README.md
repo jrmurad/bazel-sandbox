@@ -1,9 +1,5 @@
 # Bazel Sandbox
 
-One year ago, I put together a sandbox which relied on a lot of patching. Now
-that it has become clear that standard practices have not changed, this new
-sandbox will attempt to minimize deviation from the norm.
-
 ## CONVENTIONS
 
 We conventionally have two kinds of .proto files. One named \*\_service.proto with
