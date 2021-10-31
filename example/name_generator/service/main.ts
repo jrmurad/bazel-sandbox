@@ -1,6 +1,6 @@
 import * as grpc from "@grpc/grpc-js";
 import faker from "faker";
-import { map, tap, timer } from "rxjs";
+import { fromEvent, map, takeUntil, timer } from "rxjs";
 import { Name, Title } from "unity/example/common/proto/naming/v1/naming";
 import {
   NameGeneratorServer,
@@ -12,8 +12,6 @@ const argv = yargs(process.argv.slice(2))
   .options({ port: { type: "number" } })
   .parseSync();
 
-const server = new grpc.Server();
-
 function generateRandomName(): Name {
   return {
     firstName: faker.name.firstName(),
@@ -22,6 +20,8 @@ function generateRandomName(): Name {
   };
 }
 
+const server = new grpc.Server();
+
 server.addService(NameGeneratorService, {
   getRandomName: (call, callback) => {
     callback(null, { name: generateRandomName() });
@@ -29,11 +29,10 @@ server.addService(NameGeneratorService, {
 
   streamRandomNames: (call) => {
     timer(0, 1000)
-      .pipe(
-        map(generateRandomName),
-        tap((name) => call.write({ name }))
-      )
-      .subscribe();
+      .pipe(takeUntil(fromEvent(call, "cancelled")), map(generateRandomName))
+      .subscribe((name) => {
+        call.write({ name });
+      });
   },
 } as NameGeneratorServer);
 
