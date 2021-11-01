@@ -16,7 +16,8 @@
     "simple-import-sort",
     "sort-destructure-keys",
     "sort-keys-fix",
-    "typescript-sort-keys"
+    "typescript-sort-keys",
+    "unity"
   ],
   "rules": {
     "no-console": "error",
@@ -37,6 +38,7 @@
       { "caseSensitive": false, "natural": true }
     ],
     "typescript-sort-keys/interface": "error",
-    "typescript-sort-keys/string-enum": "error"
+    "typescript-sort-keys/string-enum": "error",
+    "unity/no-bazel-bin-imports": "error"
   }
 }
