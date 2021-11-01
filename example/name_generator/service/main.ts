@@ -1,7 +1,7 @@
 import * as grpc from "@grpc/grpc-js";
 import faker from "faker";
 import { fromEvent, map, takeUntil, timer } from "rxjs";
-import { Name, Title } from "unity/example/common/proto/naming/v1/naming";
+import { Name } from "unity/example/common/proto/naming/v1/naming";
 import {
   NameGeneratorServer,
   NameGeneratorService,
@@ -16,7 +16,6 @@ function generateRandomName(): Name {
   return {
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
-    title: Title.TITLE_DR, // JRM FIXME patch proto2 optional
   };
 }
 

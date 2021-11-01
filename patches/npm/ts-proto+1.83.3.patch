@@ -1,9 +1,8 @@
 diff --git a/node_modules/ts-proto/build/.plugin.js.swp b/node_modules/ts-proto/build/.plugin.js.swp
 new file mode 100644
-index 0000000..bc3a196
-Binary files /dev/null and b/node_modules/ts-proto/build/.plugin.js.swp differ
+index 0000000..e69de29
 diff --git a/node_modules/ts-proto/build/main.js b/node_modules/ts-proto/build/main.js
-index 51918b7..9832f97 100644
+index 51918b7..80490eb 100644
 --- a/node_modules/ts-proto/build/main.js
 +++ b/node_modules/ts-proto/build/main.js
 @@ -17,7 +17,7 @@ const schema_1 = require("./schema");
@@ -24,6 +23,30 @@ index 51918b7..9832f97 100644
      const chunks = [];
      // Indicate this file's source protobuf package for reflective use with google.protobuf.Any
      if (options.exportCommonSymbols) {
+@@ -371,7 +371,7 @@ function makeTimestampMethods(options, longs) {
+ }
+ // When useOptionals=true, non-scalar fields are translated into optional properties.
+ function isOptionalProperty(field, options) {
+-    return (options.useOptionals && types_1.isMessage(field) && !types_1.isRepeated(field)) || field.proto3Optional;
++    return (options.useOptionals && types_1.isMessage(field) && !types_1.isRepeated(field) && field.label !== ts_proto_descriptors_1.FieldDescriptorProto_Label.LABEL_REQUIRED) || field.proto3Optional || field.label === ts_proto_descriptors_1.FieldDescriptorProto_Label.LABEL_OPTIONAL;
+ }
+ // Create the interface with properties
+ function generateInterfaceDeclaration(ctx, fullName, messageDesc, sourceInfo, fullTypeName) {
+@@ -695,6 +695,14 @@ function generateEncode(ctx, fullName, messageDesc) {
+         if (message.${fieldName} !== undefined) {
+           ${writeSnippet(`message.${fieldName}`)};
+         }
++      `);
++        }
++        else if (field.label === ts_proto_descriptors_1.FieldDescriptorProto_Label.LABEL_OPTIONAL) {
++            // Oneofs don't have a default value check b/c they need to denote which-oneof presence
++            chunks.push(ts_poet_1.code `
++        if (message.${fieldName} !== undefined) {
++          ${writeSnippet(`message.${fieldName}`)};
++        }
+       `);
+         }
+         else if (types_1.isMessage(field)) {
 diff --git a/node_modules/ts-proto/build/plugin.js b/node_modules/ts-proto/build/plugin.js
 index 809f5d7..8261a81 100644
 --- a/node_modules/ts-proto/build/plugin.js
@@ -45,3 +68,16 @@ index 809f5d7..8261a81 100644
      if (options.outputTypeRegistry) {
          const utils = main_1.makeUtils(options);
          const ctx = { options, typeMap, utils };
+diff --git a/node_modules/ts-proto/build/types.js b/node_modules/ts-proto/build/types.js
+index 41198a8..7ec55d8 100644
+--- a/node_modules/ts-proto/build/types.js
++++ b/node_modules/ts-proto/build/types.js
+@@ -488,7 +488,7 @@ function toTypeName(ctx, messageDesc, field) {
+     // clause, spelling each option out inside a large type union. No need for
+     // union with `undefined` here, either.
+     const { options } = ctx;
+-    if ((!isWithinOneOf(field) && isMessage(field) && !options.useOptionals) ||
++    if ((!isWithinOneOf(field) && isMessage(field) && !options.useOptionals && field.label !== ts_proto_descriptors_1.FieldDescriptorProto_Label.LABEL_REQUIRED) ||
+         (isWithinOneOf(field) && options.oneof === options_1.OneofOption.PROPERTIES) ||
+         (isWithinOneOf(field) && field.proto3Optional)) {
+         return ts_poet_1.code `${type} | undefined`;
