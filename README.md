@@ -43,5 +43,7 @@ enable Chrome flag: #allow-insecure-localhost
 
 ### Should Have
 
-1. patch ts-proto proto2 optional
+1. buf lint through bazel
+1. eslint through bazel
+1. markdownlint through bazel
 1. PR rules_proto with esModuleInterop so we don't need to patch proto-loader?
