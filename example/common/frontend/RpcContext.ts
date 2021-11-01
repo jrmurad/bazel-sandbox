@@ -3,6 +3,8 @@ import { BrowserHeaders } from "browser-headers";
 import React from "react";
 import { Observable, share } from "rxjs";
 
+// copied from ts-proto's identical GrpcWebImpl for services
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface UnaryMethodDefinitionishR
   extends grpc.UnaryMethodDefinition<any, any> {

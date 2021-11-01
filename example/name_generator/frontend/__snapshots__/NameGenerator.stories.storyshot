@@ -2,11 +2,18 @@
 
 exports[`Storyshots Examples / NameGenerator Component 1`] = `
 Array [
-  <button
-    onClick={[Function]}
-  >
-    Generate New Name
-  </button>,
-  <div />,
+  <div>
+    <button
+      onClick={[Function]}
+    >
+      Generate New Name
+    </button>
+    <span />
+  </div>,
+  <textarea
+    readOnly={true}
+    rows={10}
+    value=""
+  />,
 ]
 `;

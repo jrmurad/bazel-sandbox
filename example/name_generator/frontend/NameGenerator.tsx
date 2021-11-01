@@ -27,10 +27,10 @@ export const NameGenerator: React.FC = () => {
 
   return (
     <>
-      <div style={{ display: "flex" }}>
+      <div>
         <button onClick={getRandomName}>Generate New Name</button>
 
-        <div>{unaryName}</div>
+        <span>{unaryName}</span>
       </div>
 
       <textarea readOnly rows={10} value={streamedNames.join("\n")} />

@@ -1,6 +1,8 @@
 module.exports = {
   moduleNameMapper: {
-    "^unity/(.*)": `${process.env.RUNFILES}/unity/$1`,
+    "^unity/(.*)": process.env.RUNFILES
+      ? `${process.env.RUNFILES}/unity/$1`
+      : "<rootDir>/bazel-bin/$1",
   },
   testEnvironment: "jsdom",
   transform: {
