@@ -36,7 +36,6 @@ enable Chrome flag: #allow-insecure-localhost
 ### Must Have
 
 1. prove grpc-web works in production
-1. different outputs for grpc-web
 1. prove that a create-react-app project can use bazel-built npm package within
    monorepo
 1. image storyshots through docker
