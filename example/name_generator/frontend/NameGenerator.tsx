@@ -1,10 +1,16 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { RpcContext } from "unity/example/common/frontend/RpcContext";
 import { NameGeneratorClientImpl } from "unity/example/name_generator/proto/v1/name_generator_service_web";
 
 export const NameGenerator: React.FC = () => {
   const rpc = useContext(RpcContext);
-  const nameGenerator = new NameGeneratorClientImpl(rpc);
+  const nameGenerator = useMemo(() => new NameGeneratorClientImpl(rpc), [rpc]);
 
   const [streamedNames, setStreamedNames] = useState<string[]>([]);
   const [unaryName, setUnaryName] = useState<string | undefined>();
