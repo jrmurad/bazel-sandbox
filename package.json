@@ -17,6 +17,7 @@
     "@babel/preset-env": "^7.16.0",
     "@babel/preset-react": "^7.16.0",
     "@babel/preset-typescript": "^7.16.0",
+    "@bazel/esbuild": "^4.4.2",
     "@bazel/rollup": "^4.4.2",
     "@bazel/typescript": "^4.4.2",
     "@rollup/plugin-alias": "^3.1.8",

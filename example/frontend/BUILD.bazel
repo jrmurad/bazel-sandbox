@@ -1,6 +1,6 @@
-load("@npm//@bazel/rollup:index.bzl", "rollup_bundle")
 load("@npm//@bazel/typescript:index.bzl", "ts_project")
 load("@npm//live-server:index.bzl", "live_server")
+load("@npm//@bazel/esbuild:index.bzl", "esbuild")
 
 ts_project(
     name = "index_ts",
@@ -17,17 +17,15 @@ ts_project(
     ],
 )
 
-rollup_bundle(
+esbuild(
     name = "bundle",
-    config_file = "//:rollup.config.js",
-    entry_point = "index.js",
-    format = "iife",
+    entry_point = "index.tsx",
+    link_workspace_root = True,
+    # Might need some combination of these to enable chunking
+    # output_dir = True,
+    # splitting = True,
     deps = [
         ":index_ts",
-        "@npm//@rollup/plugin-alias",
-        "@npm//@rollup/plugin-commonjs",
-        "@npm//@rollup/plugin-node-resolve",
-        "@npm//@rollup/plugin-replace",
     ],
 )
 
