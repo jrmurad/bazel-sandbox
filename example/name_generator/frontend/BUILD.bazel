@@ -29,7 +29,7 @@ copy_to_bin(
 npm_package_bin(
     name = "storybook",
     args = [
-        "--config-dir bazel-out/k8-fastbuild/bin/.storybook",
+        "--config-dir $(BINDIR)/.storybook",
         "--output-dir $(@D)",
     ],
     data = [
@@ -49,9 +49,7 @@ jest_test(
         "//example:storyshots.puppeteer.test.ts",
         "//example:storyshots.test.ts",
     ],
-    args = [
-        "--storybook=$(rootpath :storybook)",
-    ],
+    args = ["--storybook=$(rootpath :storybook)"],
     data = [
         ":storybook",
         ":frontend",

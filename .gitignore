@@ -3,6 +3,8 @@ bazel-*
 
 node_modules
 
+__diff_output__
+
 storybook-static
 
 yarn-debug.log*
