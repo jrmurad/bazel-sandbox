@@ -23,7 +23,7 @@ yarn_install(
     name = "npm",
     data = [
         "//:patches/npm/@grpc+proto-loader+0.6.6.patch",
-        "//:patches/npm/ts-proto+1.83.3.patch",
+        "//:patches/npm/ts-proto+1.85.0.patch",
     ],
     frozen_lockfile = True,
     package_json = "//:package.json",
