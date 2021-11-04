@@ -21,6 +21,7 @@ def jest_test(name, srcs, data = [], jest_config = "//:jest.config.js", **kwargs
         "--colors",
         "--no-cache",
         "--no-watchman",
+        "--runInBand",  # JRM FIXME works around issue with passing custom --storybook arg
     ]
 
     templated_args.extend(["--config", "$(rootpath %s)" % jest_config])
@@ -51,4 +52,5 @@ def jest_test(name, srcs, data = [], jest_config = "//:jest.config.js", **kwargs
             "--runInBand",
             "--updateSnapshot",
         ],
+        **kwargs
     )

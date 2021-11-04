@@ -30,7 +30,7 @@ npm_package_bin(
     name = "storybook",
     args = [
         "--config-dir bazel-out/k8-fastbuild/bin/.storybook",
-        "--output-dir bazel-out/k8-fastbuild/bin/storybook-static",
+        "--output-dir $(@D)",
     ],
     data = [
         ":frontend",
@@ -46,11 +46,14 @@ npm_package_bin(
 jest_test(
     name = "storyshots",
     srcs = [
-        # "//example:storyshots.puppeteer.test.ts",
+        "//example:storyshots.puppeteer.test.ts",
         "//example:storyshots.test.ts",
     ],
+    args = [
+        "--storybook=$(rootpath :storybook)",
+    ],
     data = [
-        # ":storybook",
+        ":storybook",
         ":frontend",
         "//:.storybook",
         "//:babel.config.js",
@@ -59,6 +62,7 @@ jest_test(
         "@npm//@storybook/addon-storyshots-puppeteer",
         "@npm//@storybook/react",
         "@npm//tsconfig-paths-webpack-plugin",
+        "@npm//yargs",
     ] + glob([
         "**/*.stories.tsx",
         "**/__image_snapshots__/*.png",
