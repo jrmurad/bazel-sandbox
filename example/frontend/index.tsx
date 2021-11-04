@@ -1,7 +1,10 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
-import { ErrorBoundary } from "../common/frontend/ErrorBoundary";
-import { grpcWebImpl, RpcContext } from "../common/frontend/RpcContext";
+import { ErrorBoundary } from "unity/example/common/frontend/ErrorBoundary";
+import {
+  grpcWebImpl,
+  RpcContext,
+} from "unity/example/common/frontend/RpcContext";
 
 const NameGenerator = React.lazy(
   () => import("unity/example/name_generator/frontend/NameGenerator")
