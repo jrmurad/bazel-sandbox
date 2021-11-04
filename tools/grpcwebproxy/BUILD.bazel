@@ -1,0 +1,5 @@
+exports_files([
+    "grpcwebproxy.sh",
+    "grpcwebproxy-v0.14.1-linux-x86_64",
+    "grpcwebproxy-v0.14.1-osx-x86_64",
+])
