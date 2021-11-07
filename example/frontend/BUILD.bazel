@@ -14,6 +14,10 @@ ts_project(
         "//example/common/frontend:error_boundary",
         "//example/common/frontend:rpc_context",
         "//example/name_generator/frontend",
+        "@npm//@types/react",
+        "@npm//@types/react-dom",
+        "@npm//react",
+        "@npm//react-dom",
     ],
 )
 
