@@ -1,0 +1,9 @@
+syntax = "proto2";
+
+package trumid.list_trading.rfq.proto.v1;
+
+message CreateDraftRequest {}
+
+message CreateDraftResponse {
+  required string id = 1;
+}

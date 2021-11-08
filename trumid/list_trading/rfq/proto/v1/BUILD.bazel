@@ -1,0 +1,54 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@build_stack_rules_proto//rules/ts:proto_ts_library.bzl", "proto_ts_library")
+load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
+
+package(default_visibility = ["//trumid:__subpackages__"])
+
+proto_library(
+    name = "trumid_list_trading_rfq_proto_v1_proto",
+    srcs = [
+        "rfq.proto",
+        "rfq_service.proto",
+    ],
+)
+
+proto_compile(
+    name = "trumid_list_trading_rfq_proto_v1_ts_proto_compile",
+    options = {"//tools/ts-proto:protoc-gen-ts-proto": [
+        "emitImportedFiles=false",
+        "esModuleInterop=true",
+        "oneof=unions",
+        "outputClientImpl=grpc-web",
+        "outputServices=grpc-js",
+        "stringEnums=true",
+        "useOptionals=true",
+    ]},
+    outputs = [
+        "rfq.ts",
+        "rfq_service.ts",
+        "rfq_service_web.ts",
+    ],
+    plugins = ["//tools/ts-proto:protoc-gen-ts-proto"],
+    proto = "trumid_list_trading_rfq_proto_v1_proto",
+)
+
+proto_ts_library(
+    name = "trumid_list_trading_rfq_proto_v1_ts_proto",
+    srcs = [
+        "rfq.ts",
+        "rfq_service.ts",
+        "rfq_service_web.ts",
+    ],
+    args = [
+        "--esModuleInterop",
+        "--lib ES2015,DOM",
+    ],
+    tsc = "@npm//typescript/bin:tsc",
+    deps = [
+        "@npm//@grpc/grpc-js",
+        "@npm//@improbable-eng/grpc-web",
+        "@npm//long",
+        "@npm//protobufjs",
+        "@npm//rxjs",
+    ],
+)

@@ -77,7 +77,6 @@ export const createLineItemMachine = (
       drafting: {
         on: {
           "COUNTERPARTY.ADD": {
-            // actions: assign({ counterpartyQuotes: addNewCounterparty}),
             actions: assign({
               // https://xstate.js.org/docs/guides/typescript.html#assign-action-behaving-strangely
               counterpartyQuotes: (context, event) =>
@@ -86,9 +85,9 @@ export const createLineItemMachine = (
           },
           SEND: {
             actions: ({ counterpartyQuotes }) => {
-              counterpartyQuotes.forEach(({ ref }) =>
-                ref.send({ type: "SEND" })
-              );
+              counterpartyQuotes.forEach(({ ref }) => {
+                ref.send({ type: "SEND" });
+              });
             },
             target: "quoting",
           },

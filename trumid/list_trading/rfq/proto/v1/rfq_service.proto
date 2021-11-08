@@ -1,0 +1,9 @@
+syntax = "proto2";
+
+package trumid.list_trading.rfq.proto.v1;
+
+import "trumid/list_trading/rfq/proto/v1/rfq.proto";
+
+service Rfq {
+  rpc CreateDraft(CreateDraftRequest) returns (CreateDraftResponse);
+}
