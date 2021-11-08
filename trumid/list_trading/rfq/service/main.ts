@@ -22,7 +22,7 @@ rfqService.send({
 
 rfqService.send({ type: "SEND" });
 
-rfqService.state.context.lineItems[0].ref.send({ type: "END" });
+// rfqService.state.context.lineItems[0].ref.send({ type: "END" });
 rfqService.state.context.lineItems[1].ref.send({ type: "END" });
 // console.log(rfqService.state.context);
 console.log(rfqService.state.value);

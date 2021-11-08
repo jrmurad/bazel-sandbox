@@ -20,9 +20,9 @@ type END_LINE_ITEM_EVENT = {
 
 type RfqEvent =
   | { type: "END" }
+  | { type: "SEND" }
   | ADD_LINE_ITEM_EVENT
-  | END_LINE_ITEM_EVENT
-  | { type: "SEND" };
+  | END_LINE_ITEM_EVENT;
 
 interface RfqContext {
   expiry?: number;

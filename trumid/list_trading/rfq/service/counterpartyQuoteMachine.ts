@@ -1,10 +1,11 @@
-import { createMachine } from "xstate";
+import { createMachine, sendParent } from "xstate";
 
 type CounterpartyQuoteEvent =
   | { type: "ACCEPT" }
   | { type: "COUNTER" }
   | { type: "END" }
-  | { type: "QUOTE" };
+  | { type: "QUOTE" }
+  | { type: "SEND" };
 
 export interface CounterpartyQuoteContext {
   counterpartyId: string;
@@ -15,7 +16,7 @@ export const createCounterpartyQuoteMachine = (
 ) =>
   createMachine<CounterpartyQuoteContext, CounterpartyQuoteEvent>({
     context,
-    initial: "awaiting",
+    initial: "drafting",
     states: {
       accepted: { type: "final" },
       awaiting: {
@@ -31,7 +32,15 @@ export const createCounterpartyQuoteMachine = (
           QUOTE: { target: "quoted" },
         },
       },
-      ended: { type: "final" },
+      drafting: {
+        on: {
+          SEND: { target: "awaiting" },
+        },
+      },
+      ended: {
+        entry: sendParent({ type: "COUNTERPARTY.END" }),
+        type: "final",
+      },
       quoted: {
         on: {
           ACCEPT: { target: "accepted" },

@@ -1,4 +1,12 @@
-import { ActorRefFrom, assign, createMachine, sendParent, spawn } from "xstate";
+import {
+  actions,
+  ActorRefFrom,
+  assign,
+  createMachine,
+  send,
+  sendParent,
+  spawn,
+} from "xstate";
 import {
   CounterpartyQuoteContext,
   createCounterpartyQuoteMachine,
@@ -9,12 +17,18 @@ type ADD_COUNTERPARTY_EVENT = {
   type: "COUNTERPARTY.ADD";
 };
 
+type END_COUNTERPARTY_EVENT = {
+  counterpartyQuote: CounterpartyQuoteContext;
+  type: "COUNTERPARTY.END";
+};
+
 type LineItemEvent =
   | { type: "ADD" }
-  | ADD_COUNTERPARTY_EVENT
   | { type: "END" }
   | { type: "SEND" }
-  | { type: "TRADE" };
+  | { type: "TRADE" }
+  | ADD_COUNTERPARTY_EVENT
+  | END_COUNTERPARTY_EVENT;
 
 export interface LineItemContext {
   counterpartyQuotes: {
@@ -42,6 +56,17 @@ function addNewCounterparty(
   ];
 }
 
+const endWhenAllCounterpartiesEnded = actions.choose<
+  LineItemContext,
+  END_COUNTERPARTY_EVENT
+>([
+  {
+    actions: send("END"),
+    cond: ({ counterpartyQuotes }) =>
+      counterpartyQuotes.every(({ ref }) => ref.getSnapshot()?.done),
+  },
+]);
+
 export const createLineItemMachine = (
   context: Pick<LineItemContext, "instrumentId">
 ) =>
@@ -49,33 +74,37 @@ export const createLineItemMachine = (
     context: { ...context, counterpartyQuotes: [] },
     initial: "drafting",
     states: {
-      awaiting: {
-        on: {
-          END: { target: "ended" },
-        },
-      },
       drafting: {
         on: {
           "COUNTERPARTY.ADD": {
+            // actions: assign({ counterpartyQuotes: addNewCounterparty}),
             actions: assign({
               // https://xstate.js.org/docs/guides/typescript.html#assign-action-behaving-strangely
               counterpartyQuotes: (context, event) =>
                 addNewCounterparty(context, event),
             }),
           },
-          SEND: { target: "awaiting" },
+          SEND: {
+            actions: ({ counterpartyQuotes }) => {
+              counterpartyQuotes.forEach(({ ref }) =>
+                ref.send({ type: "SEND" })
+              );
+            },
+            target: "quoting",
+          },
         },
       },
       ended: {
-        entry: sendParent({ type: "LINE_ITEM.END" }), // JRM FIXME parent event typechecking?
+        entry: sendParent({ type: "LINE_ITEM.END" }),
         type: "final",
       },
-      quoted: {
+      quoting: {
         on: {
+          "COUNTERPARTY.END": {
+            actions: endWhenAllCounterpartiesEnded,
+          },
           END: { target: "ended" },
-          TRADE: { target: "traded" },
         },
       },
-      traded: { type: "final" },
     },
   });
