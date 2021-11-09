@@ -6,7 +6,7 @@ import {
   send,
   spawn,
 } from "xstate";
-import { createLineItemMachine, LineItemContext } from "./lineItemMachine";
+import { createLineItemMachine, LineItemContext } from "./line-item.machine";
 
 type ADD_LINE_ITEM_EVENT = {
   lineItem: LineItemContext;

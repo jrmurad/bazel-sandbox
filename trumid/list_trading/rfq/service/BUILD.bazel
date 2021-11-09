@@ -4,13 +4,14 @@ load("@npm//@bazel/typescript:index.bzl", "ts_project")
 ts_project(
     name = "main",
     srcs = glob(
-        ["**/*.ts"],
-        exclude = ["**/*.test.ts"],
+        ["src/**/*.ts"],
+        exclude = ["src/**/*.test.ts"],
     ),
     declaration = True,
     tsconfig = "//:tsconfig.json",
     deps = [
         "//trumid/list_trading/rfq/proto/v1:trumid_list_trading_rfq_proto_v1_ts_proto",
+        "@npm//typeorm",
         "@npm//xstate",
     ],
 )
@@ -19,5 +20,5 @@ nodejs_binary(
     name = "service",
     args = ["--bazel_patch_module_resolver"],
     data = [":main"],
-    entry_point = ":main.ts",
+    entry_point = ":src/main.ts",
 )

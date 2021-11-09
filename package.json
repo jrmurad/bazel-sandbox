@@ -7,10 +7,12 @@
     "@improbable-eng/grpc-web": "^0.15.0",
     "faker": "^5.5.3",
     "lodash": "^4.17.21",
+    "mongodb": "^4.1.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.4.0",
+    "typeorm": "^0.2.38",
     "xstate": "^4.26.0",
     "yargs": "^17.2.1"
   },

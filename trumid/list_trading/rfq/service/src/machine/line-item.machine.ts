@@ -10,7 +10,7 @@ import {
 import {
   CounterpartyQuoteContext,
   createCounterpartyQuoteMachine,
-} from "./counterpartyQuoteMachine";
+} from "./counterparty-quote.machine";
 
 type ADD_COUNTERPARTY_EVENT = {
   counterpartyQuote: CounterpartyQuoteContext;
