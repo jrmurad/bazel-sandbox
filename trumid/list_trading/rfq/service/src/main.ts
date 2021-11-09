@@ -28,32 +28,56 @@
 // console.log(rfqService.state.value);
 
 import * as grpc from "@grpc/grpc-js";
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient, MongoError, ObjectId } from "mongodb";
+import { State } from "unity/trumid/list_trading/rfq/proto/v1/rfq";
 import {
   RfqServer,
   RfqService,
 } from "unity/trumid/list_trading/rfq/proto/v1/rfq_service";
 
-interface Rfq {}
+interface Rfq {
+  state: State;
+}
+
+// JRM TODO move to common
+function handleError<T>(callback: grpc.sendUnaryData<T>, err: unknown) {
+  if (err instanceof MongoError) {
+    callback({ message: err.message, name: err.name });
+  } else {
+    console.error(err);
+  }
+}
 
 (async function () {
   const client = await new MongoClient("mongodb://localhost", {
     directConnection: true,
+    replicaSet: "rs0",
   }).connect();
-  const db = client.db("rfq");
-  const rfqs = db.collection<Rfq>("rfqs");
 
-  rfqs.watch();
+  const rfqs = client.db("rfq").collection<Rfq>("rfqs");
 
   const server = new grpc.Server();
 
   server.addService(RfqService, {
     createDraft: async (call, callback) => {
-      const rfq = await rfqs.insertOne({});
-      callback(null, { id: rfq.insertedId.toString() });
+      try {
+        const rfq = await rfqs.insertOne({ state: State.STATE_DRAFT });
+        callback(null, { id: rfq.insertedId.toString() });
+      } catch (err) {
+        handleError(callback, err);
+      }
     },
 
-    streamRfqs: (call) => {
+    end: async (call, callback) => {
+      try {
+        await rfqs.deleteOne({ _id: new ObjectId(call.request.id) });
+        callback(null);
+      } catch (err) {
+        handleError(callback, err);
+      }
+    },
+
+    stream: (call) => {
       const cursor = rfqs.watch();
 
       call.on("cancelled", () => {
@@ -65,11 +89,11 @@ interface Rfq {}
 
         switch (operationType) {
           case "delete":
-            call.write({ id, isDeleted: true });
+            call.write({ id, state: State.STATE_ENDED });
             break;
 
           case "insert":
-            call.write({ id });
+            call.write({ id, state: State.STATE_DRAFT });
             break;
         }
       });

@@ -2,15 +2,26 @@ syntax = "proto2";
 
 package trumid.list_trading.rfq.proto.v1;
 
+enum State {
+  STATE_DRAFT = 1;
+  STATE_ENDED = 2;
+}
+
 message CreateDraftRequest {}
 
 message CreateDraftResponse {
   required string id = 1;
 }
 
-message StreamRfqsRequest {}
-
-message StreamRfqsResponse {
+message EndRequest {
   required string id = 1;
-  optional bool is_deleted = 2;
+}
+
+message EndResponse {}
+
+message StreamRequest {}
+
+message StreamResponse {
+  required string id = 1;
+  required State state = 2;
 }

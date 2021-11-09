@@ -13,7 +13,7 @@ ts_project(
     deps = [
         "//common/frontend:error_boundary",
         "//common/frontend:rpc_context",
-        "//example/name_generator/frontend",
+        "//trumid/list_trading/rfq/frontend",
         "@npm//@types/react",
         "@npm//@types/react-dom",
         "@npm//react",
@@ -42,9 +42,9 @@ live_server(
         ":bundle",
     ],
     templated_args = [
-        "./example/frontend",
+        "./trumid/frontend",
         "--entry-file=index.html",
-        "--mount=/bundle.js:example/frontend/bundle/bundle.js",
+        "--mount=/bundle.js:trumid/frontend/bundle/bundle.js",
         "--no-browser",
     ],
 )

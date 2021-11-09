@@ -39,6 +39,8 @@ enable Chrome flag: #allow-insecure-localhost
 1. prove that a create-react-app project can use bazel-built npm package within
    monorepo
 1. image storyshots through docker
+1. macro for service + binary + proxy (or envoy to deal with ports?)
+1. macro for component + tests
 
 ### Should Have
 
@@ -46,3 +48,4 @@ enable Chrome flag: #allow-insecure-localhost
 1. eslint through bazel
 1. markdownlint through bazel
 1. PR rules_proto with esModuleInterop so we don't need to patch proto-loader?
+1. why isn't vs code plugin for build lens working?

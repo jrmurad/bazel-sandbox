@@ -22,3 +22,22 @@ nodejs_binary(
     data = [":main"],
     entry_point = ":src/main.ts",
 )
+
+sh_binary(
+    name = "grpcwebproxy",
+    srcs = ["//tools/grpcwebproxy:grpcwebproxy.sh"],
+    args = [
+        "--allow_all_origins",
+        "--backend_addr=127.0.0.1:50052",
+        "--backend_tls_noverify",
+        "--run_http_server=false",
+        "--server_http_max_write_timeout=24h",
+        "--server_tls_cert_file=./tools/certs/example-com.crt",
+        "--server_tls_key_file=./tools/certs/example-com.key",
+    ],
+    data = [
+        "//tools/certs:example_com_tls",
+        "//tools/grpcwebproxy:grpcwebproxy-v0.14.1-linux-x86_64",
+        "//tools/grpcwebproxy:grpcwebproxy-v0.14.1-osx-x86_64",
+    ],
+)

@@ -1,5 +1,5 @@
 import React from "react";
-import { grpcWebImpl, RpcContext } from "../example/common/frontend/RpcContext";
+import { grpcWebImpl, RpcContext } from "../common/frontend/RpcContext";
 
 module.exports = {
   decorators: [

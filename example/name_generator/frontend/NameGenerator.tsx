@@ -5,7 +5,7 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { RpcContext } from "unity/example/common/frontend/RpcContext";
+import { RpcContext } from "unity/common/frontend/RpcContext";
 import { NameGeneratorClientImpl } from "unity/example/name_generator/proto/v1/name_generator_service_web";
 
 export const NameGenerator: React.FC = () => {

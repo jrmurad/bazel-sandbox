@@ -1,0 +1,18 @@
+load("@npm//@bazel/typescript:index.bzl", "ts_project")
+
+ts_project(
+    name = "frontend",
+    srcs = glob(
+        ["**/*.tsx"],
+        exclude = ["**/*.stories.tsx"],
+    ),
+    declaration = True,
+    tsconfig = "//:tsconfig.json",
+    visibility = ["//trumid:__subpackages__"],
+    deps = [
+        "//common/frontend:rpc_context",
+        "//trumid/list_trading/rfq/proto/v1:trumid_list_trading_rfq_proto_v1_ts_proto",
+        "@npm//@types/react",
+        "@npm//react",
+    ],
+)

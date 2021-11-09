@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import { ErrorBoundary } from "unity/common/frontend/ErrorBoundary";
 import { grpcWebImpl, RpcContext } from "unity/common/frontend/RpcContext";
 
-const NameGenerator = React.lazy(
-  () => import("unity/example/name_generator/frontend/NameGenerator")
+const Rfqs = React.lazy(
+  () => import("unity/trumid/list_trading/rfq/frontend/Rfqs")
 );
 
 ReactDOM.render(
@@ -12,7 +12,7 @@ ReactDOM.render(
     <ErrorBoundary>
       <Suspense fallback={<div>Loading...</div>}>
         <RpcContext.Provider value={grpcWebImpl}>
-          <NameGenerator />
+          <Rfqs />
         </RpcContext.Provider>
       </Suspense>
     </ErrorBoundary>
