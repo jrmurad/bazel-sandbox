@@ -23,8 +23,7 @@
       "bazel-out/k8-dbg/bin",
       "bazel-out/k8-fastbuild/bin"
     ],
-    "strict": true,
-    "strictPropertyInitialization": false // https://github.com/typeorm/typeorm/issues/2797
+    "strict": true
   },
   "exclude": ["bazel-*", "node_modules"]
 }

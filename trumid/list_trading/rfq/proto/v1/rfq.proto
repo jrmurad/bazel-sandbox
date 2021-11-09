@@ -7,3 +7,10 @@ message CreateDraftRequest {}
 message CreateDraftResponse {
   required string id = 1;
 }
+
+message StreamRfqsRequest {}
+
+message StreamRfqsResponse {
+  required string id = 1;
+  optional bool is_deleted = 2;
+}

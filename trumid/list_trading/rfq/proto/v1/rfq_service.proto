@@ -6,4 +6,6 @@ import "trumid/list_trading/rfq/proto/v1/rfq.proto";
 
 service Rfq {
   rpc CreateDraft(CreateDraftRequest) returns (CreateDraftResponse);
+
+  rpc StreamRfqs(StreamRfqsRequest) returns (stream StreamRfqsResponse);
 }

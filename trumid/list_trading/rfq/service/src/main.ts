@@ -28,29 +28,51 @@
 // console.log(rfqService.state.value);
 
 import * as grpc from "@grpc/grpc-js";
-import path from "path";
-import { createConnection, getMongoManager } from "typeorm";
+import { MongoClient, ObjectId } from "mongodb";
 import {
   RfqServer,
   RfqService,
 } from "unity/trumid/list_trading/rfq/proto/v1/rfq_service";
-import { Rfq } from "./entity/rfq.entity";
+
+interface Rfq {}
 
 (async function () {
-  await createConnection({
-    database: "rfq",
-    entities: [path.join(__dirname, "/entity/*.{js,ts}")],
-    // host: "localhost",
-    // port: 27017,
-    type: "mongodb",
-  });
+  const client = await new MongoClient("mongodb://localhost", {
+    directConnection: true,
+  }).connect();
+  const db = client.db("rfq");
+  const rfqs = db.collection<Rfq>("rfqs");
+
+  rfqs.watch();
 
   const server = new grpc.Server();
 
   server.addService(RfqService, {
     createDraft: async (call, callback) => {
-      const rfq = await getMongoManager().save(new Rfq());
-      callback(null, { id: rfq.id.toString() });
+      const rfq = await rfqs.insertOne({});
+      callback(null, { id: rfq.insertedId.toString() });
+    },
+
+    streamRfqs: (call) => {
+      const cursor = rfqs.watch();
+
+      call.on("cancelled", () => {
+        cursor.close();
+      });
+
+      cursor.on("change", ({ documentKey, operationType }) => {
+        const id = (documentKey as unknown as { _id: ObjectId })._id.toString();
+
+        switch (operationType) {
+          case "delete":
+            call.write({ id, isDeleted: true });
+            break;
+
+          case "insert":
+            call.write({ id });
+            break;
+        }
+      });
     },
   } as RfqServer);
 

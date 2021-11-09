@@ -12,7 +12,6 @@
     "react-dom": "^17.0.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.4.0",
-    "typeorm": "^0.2.38",
     "xstate": "^4.26.0",
     "yargs": "^17.2.1"
   },

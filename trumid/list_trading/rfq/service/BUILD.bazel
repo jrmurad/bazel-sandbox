@@ -11,7 +11,7 @@ ts_project(
     tsconfig = "//:tsconfig.json",
     deps = [
         "//trumid/list_trading/rfq/proto/v1:trumid_list_trading_rfq_proto_v1_ts_proto",
-        "@npm//typeorm",
+        "@npm//mongodb",
         "@npm//xstate",
     ],
 )
