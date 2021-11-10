@@ -1,5 +1,7 @@
+.bazel-cache
 bazel-*
 node_modules
+storybook-static
 
 # eslint ignores dot files and folders by default
 !/.storybook
