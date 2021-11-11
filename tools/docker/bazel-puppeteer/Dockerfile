@@ -10,4 +10,4 @@ RUN \
 
 RUN bazel version
 
-ENTRYPOINT [ "/usr/bin/bazel" ]
+ENTRYPOINT [ "/workspace/tools/docker/bazel-puppeteer/entrypoint-wrapper.sh" ]
