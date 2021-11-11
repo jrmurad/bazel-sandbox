@@ -1,11 +1,12 @@
 load("@npm//@bazel/typescript:index.bzl", "ts_project")
 
+package(default_visibility = ["//visibility:public"])
+
 ts_project(
     name = "error_boundary",
     srcs = ["ErrorBoundary.tsx"],
     declaration = True,
     tsconfig = "//:tsconfig.json",
-    visibility = ["//example:__subpackages__"],
     deps = [
         "@npm//@types/react",
         "@npm//react",
@@ -17,7 +18,6 @@ ts_project(
     srcs = ["RpcContext.ts"],
     declaration = True,
     tsconfig = "//:tsconfig.json",
-    visibility = ["//example:__subpackages__"],
     deps = [
         "@npm//@improbable-eng/grpc-web",
         "@npm//@types/react",

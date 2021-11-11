@@ -1,5 +1,7 @@
-import React from "react";
-import { grpcWebImpl, RpcContext } from "../example/common/frontend/RpcContext";
+/* eslint-disable @typescript-eslint/no-var-requires */
+
+const React = require("react");
+const { grpcWebImpl, RpcContext } = require("../common/frontend/RpcContext");
 
 module.exports = {
   decorators: [
