@@ -35,14 +35,15 @@ enable Chrome flag: #allow-insecure-localhost
 
 ### Must Have
 
+1. browserless dependency through testcontainers
 1. prove grpc-web works in production
 1. prove that a create-react-app project can use bazel-built npm package within
    monorepo
-1. image storyshots through docker
 
 ### Should Have
 
+1. upgrade ts-proto and patch
 1. buf lint through bazel
 1. eslint through bazel
 1. markdownlint through bazel
-1. PR rules_proto with esModuleInterop so we don't need to patch proto-loader?
+1. https://github.com/grpc/grpc-node/issues/2002 https://github.com/grpc/grpc-node/issues/2009
