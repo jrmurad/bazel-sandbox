@@ -46,10 +46,9 @@ initStoryshots({
         "__image_snapshots__"
       ),
     }),
-    // storybookUrl:
-    //   process.env.RUNFILES && argv.storybook
-    //     ? `file://${path.join(process.env.RUNFILES, "unity", argv.storybook)}`
-    //     : `file://${path.resolve(__dirname, "../storybook-static")}`,
+
+    // mounted in a "browserless" docker container
+    // https://hub.docker.com/r/browserless/chrome
     storybookUrl: "file:///opt/storybook-static",
   }),
 });
