@@ -54,6 +54,7 @@ jest_test(
         "//:.storybook",
         "//:babel.config.js",
         "//:package.json",
+        "@npm//@babel/plugin-proposal-class-properties",
         "@npm//@babel/preset-env",
         "@npm//@babel/preset-react",
         "@npm//@babel/preset-typescript",
