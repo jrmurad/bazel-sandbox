@@ -3,7 +3,6 @@
 
 node_modules
 
-.docker-bazel-puppeteer
 __diff_output__
 
 storybook-static

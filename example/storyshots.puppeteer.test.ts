@@ -2,6 +2,7 @@ import "regenerator-runtime/runtime";
 import initStoryshots from "@storybook/addon-storyshots";
 import { imageSnapshot } from "@storybook/addon-storyshots-puppeteer";
 import path from "path";
+import puppeteer from "puppeteer";
 import yargs from "yargs/yargs";
 
 const argv = yargs(process.argv.slice(2))
@@ -10,7 +11,7 @@ const argv = yargs(process.argv.slice(2))
 
 initStoryshots({
   test: imageSnapshot({
-    chromeExecutablePath: "/usr/bin/chromium-browser",
+    // chromeExecutablePath: "/usr/bin/chromium-browser",
     customizePage: async (page) => {
       // disable animations and blinking cursors
       await page.addStyleTag({
@@ -36,6 +37,8 @@ initStoryshots({
       // avoid :hover
       await page.mouse.move(-1, -1);
     },
+    getCustomBrowser: () =>
+      puppeteer.connect({ browserWSEndpoint: "ws://localhost:3001" }),
     getMatchOptions: ({ context }) => ({
       customSnapshotsDir: path.join(
         __dirname,
@@ -43,9 +46,10 @@ initStoryshots({
         "__image_snapshots__"
       ),
     }),
-    storybookUrl:
-      process.env.RUNFILES && argv.storybook
-        ? `file://${path.join(process.env.RUNFILES, "unity", argv.storybook)}`
-        : `file://${path.resolve(__dirname, "../storybook-static")}`,
+    // storybookUrl:
+    //   process.env.RUNFILES && argv.storybook
+    //     ? `file://${path.join(process.env.RUNFILES, "unity", argv.storybook)}`
+    //     : `file://${path.resolve(__dirname, "../storybook-static")}`,
+    storybookUrl: "file:///opt/storybook-static",
   }),
 });
