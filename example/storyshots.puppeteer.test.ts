@@ -3,11 +3,6 @@ import initStoryshots from "@storybook/addon-storyshots";
 import { imageSnapshot } from "@storybook/addon-storyshots-puppeteer";
 import path from "path";
 import puppeteer from "puppeteer";
-import yargs from "yargs/yargs";
-
-const argv = yargs(process.argv.slice(2))
-  .options({ storybook: { type: "string" } })
-  .parseSync();
 
 initStoryshots({
   test: imageSnapshot({
