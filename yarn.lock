@@ -1942,28 +1942,28 @@
   resolved "https://registry.yarnpkg.com/@base2/pretty-print-object/-/pretty-print-object-1.0.1.tgz#371ba8be66d556812dc7fb169ebc3c08378f69d4"
   integrity sha512-4iri8i1AqYHJE2DstZYkyEprg6Pq6sKx3xn5FpySk9sNhH7qN2LLlHJCfDTZRILNwQNPD7mATWM0TBui7uC1pA==
 
-"@bazel/rollup@^4.4.2":
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/@bazel/rollup/-/rollup-4.4.2.tgz#a6e627acb8fa7fe031c0b671b704744cbd8a117f"
-  integrity sha512-zsmpBxlrCjt/LdZK3gp6fnMmVF2yFU7cjs8g9ZKnvZ6IUYBtjiq5TsQ0H/himg4gkqL14c6k8pTeBWILD/8iDg==
+"@bazel/rollup@^4.6.1":
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/@bazel/rollup/-/rollup-4.6.1.tgz#7e5054b1b43c1052bdd8824d9f1a11a410d540e2"
+  integrity sha512-8a2halG0dnzjs0BgGiHOM47LVCotGW0I9lSWLdwrTxTNOp8fEdbZ8C7TMHFE+8Zc3Z5oerqR8uvIpMarOJQumQ==
   dependencies:
-    "@bazel/worker" "4.4.2"
+    "@bazel/worker" "4.6.1"
 
-"@bazel/typescript@^4.4.2":
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/@bazel/typescript/-/typescript-4.4.2.tgz#987000806043d9df1388debcd576420ce5b8c860"
-  integrity sha512-dTt/AvlnwWiUXF7T25FpAozmLKN9Z+me07iSOcjDv7+6aVcxV5vJTbhpktZO1Ij0oSaYew4I8e/NlRf/mS2k7g==
+"@bazel/typescript@^4.6.1":
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/@bazel/typescript/-/typescript-4.6.1.tgz#5c674698bda53006d784cb40ba1e2cb1263ecc20"
+  integrity sha512-T/2mOB9lSySaIQH47JsbKE8UG7eEChFltXCVNw2xk1+Eu7ym+osSIjaXoQVBPmAl/6qmIEzTyBIjFPEU2ohVrw==
   dependencies:
-    "@bazel/worker" "4.4.2"
+    "@bazel/worker" "4.6.1"
     protobufjs "6.8.8"
     semver "5.6.0"
     source-map-support "0.5.9"
     tsutils "3.21.0"
 
-"@bazel/worker@4.4.2":
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/@bazel/worker/-/worker-4.4.2.tgz#01dcfa873786d4ad0b7150b8f9d03a23aa0c19e4"
-  integrity sha512-EkxgsV2o6nPd/+ujnyCuKU3C57sjYDdtQVPLdBBIiOmx37RPBw+tRMrp6XYgU3PkhqgMqNQPpS/9Exbj0XSihQ==
+"@bazel/worker@4.6.1":
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/@bazel/worker/-/worker-4.6.1.tgz#96925f5819344225d4fe40ffa630a3c5f4847a0b"
+  integrity sha512-D6TsHxGSljmlLoz8FXL1+ISh8XnDuRkBpT6Mz0wD62eWajUZASTfX9I4HNiLNbsWY4Omc7nKXI+j4R8/BLciFg==
   dependencies:
     google-protobuf "^3.6.1"
 
