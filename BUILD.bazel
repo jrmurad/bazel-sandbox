@@ -33,6 +33,8 @@ exports_files([
     "jest.config.js",
     "package.json",
     "rollup.config.js",
+    "storyshots.test.ts",
+    "storyshots.puppeteer.test.ts",
     "tsconfig.json",
 ])
 

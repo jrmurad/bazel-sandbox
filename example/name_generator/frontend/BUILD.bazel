@@ -44,8 +44,8 @@ npm_package_bin(
 jest_test(
     name = "storyshots",
     srcs = [
-        "//example:storyshots.puppeteer.test.ts",
-        "//example:storyshots.test.ts",
+        "//:storyshots.puppeteer.test.ts",
+        "//:storyshots.test.ts",
     ],
     args = ["--storybook=$(rootpath :storybook)"],
     data = [
