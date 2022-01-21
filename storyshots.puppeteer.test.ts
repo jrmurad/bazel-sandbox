@@ -20,7 +20,7 @@ const hostStorybookStaticDir =
         process.env.BAZEL_WORKSPACE || "",
         argv.storybook
       )
-    : path.resolve(__dirname, "../storybook-static");
+    : path.resolve(__dirname, "storybook-static");
 
 initStoryshots({
   test: imageSnapshot({
