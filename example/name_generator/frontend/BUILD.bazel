@@ -61,6 +61,7 @@ jest_test(
         "@npm//@storybook/addon-storyshots",
         "@npm//@storybook/addon-storyshots-puppeteer",
         "@npm//@storybook/react",
+        "@npm//testcontainers",
         "@npm//tsconfig-paths-webpack-plugin",
         "@npm//yargs",
     ] + glob([
